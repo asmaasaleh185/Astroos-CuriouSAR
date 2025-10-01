@@ -1,0 +1,22 @@
+:root {
+  --bg: #02040a;
+  --card: #071425;
+  --accent: #00ffd6;
+  --accent-2: #7ed6ff;
+  --muted: #9fb3c8;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  scroll-behavior: smooth;
+  color: var(--muted);
+  background: var(--bg);
+  /* background: url("../img/image.png") no-repeat;
+  background-size: cover; */
+  -webkit-font-smoothing: antialiased;
+}
