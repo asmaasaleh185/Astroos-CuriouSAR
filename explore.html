@@ -34,24 +34,26 @@
         <div class="mission-header">
             <h1 class="section-title">MISSION CONTROL DASHBOARD</h1>
             <p class="section-subtitle">Select a module to begin your training</p>
+            <!-- Added tour start button -->
+            <button id="startTourBtn" class="tour-start-btn">🎯 Start Guided Tour</button>
         </div>
 
-        <div class="learning-grid">
-            <div class="learning-card" data-topic="intro">
+        <div class="learning-grid" id="learningGrid">
+            <div class="learning-card" data-topic="intro" data-tour-step="1">
                 <div class="card-icon">📡</div>
                 <h3>Introduction to Remote Sensing</h3>
                 <p>Discover the fundamentals of observing Earth from space</p>
                 <div class="card-status">MODULE 01</div>
             </div>
 
-            <div class="learning-card" data-topic="frequencies">
+            <div class="learning-card" data-topic="frequencies" data-tour-step="2">
                 <div class="card-icon">📊</div>
                 <h3>Frequencies & Polarizations</h3>
                 <p>Understand electromagnetic spectrum and wave properties</p>
                 <div class="card-status">MODULE 02</div>
             </div>
 
-            <div class="learning-card" data-topic="sar">
+            <div class="learning-card" data-topic="sar" data-tour-step="3">
                 <div class="card-icon">🛰️</div>
                 <h3>How SAR Works</h3>
                 <p>Explore Synthetic Aperture Radar technology in depth</p>
@@ -71,17 +73,80 @@
                 <p>Test your understanding with interactive quizzes</p>
                 <div class="card-status">CHALLENGE</div>
             </div>
+
+            <!-- Added new Ask SAR card -->
+            <a href="ask-sar.html" class="learning-card ask-sar-card" data-tour-step="4">
+                <div class="card-icon">🤖</div>
+                <h3>Ask SAR</h3>
+                <p>A question and the radar will answer you in a moment</p>
+                <div class="card-status">AI ASSISTANT</div>
+            </a>
         </div>
     </main>
 
-     Modal for Learning Content 
+    <!-- Added guided tour overlay and tooltip -->
+    <div id="tourOverlay" class="tour-overlay hidden">
+        <div class="tour-spotlight"></div>
+    </div>
+
+    <div id="tourTooltip" class="tour-tooltip hidden">
+        <div class="tour-tooltip-content">
+            <div class="tour-step-indicator">
+                <span id="tourStepNumber">1</span> / <span id="tourTotalSteps">5</span>
+            </div>
+            <h3 id="tourTitle">Welcome to Mission Control</h3>
+            <p id="tourDescription">This is your command center for learning about SAR technology.</p>
+            <div class="tour-navigation">
+                <button id="tourSkipBtn" class="tour-btn tour-skip">Skip Tour</button>
+                <div class="tour-nav-buttons">
+                    <button id="tourPrevBtn" class="tour-btn tour-prev" disabled>← Back</button>
+                    <button id="tourNextBtn" class="tour-btn tour-next">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced modal with multi-page system and quiz support -->
     <div id="learningModal" class="modal">
+        <div class="modal-background-animation">
+            <div class="modal-stars"></div>
+            <div class="radar-pulse"></div>
+        </div>
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <div id="modalBody"></div>
+            
+            <!-- Progress Indicator -->
+            <div id="progressIndicator" class="progress-indicator"></div>
+            
+            <!-- Module Content Container -->
+            <div id="modalBody" class="modal-body"></div>
+            
+            <!-- Navigation Buttons -->
+            <div id="moduleNavigation" class="module-navigation">
+                <button id="prevBtn" class="nav-btn prev-btn">← Previous</button>
+                <button id="nextBtn" class="nav-btn next-btn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz score popup -->
+    <div id="quizScorePopup" class="quiz-score-popup hidden">
+        <div class="score-content">
+            <div class="score-icon">🎯</div>
+            <h2>Mission Complete!</h2>
+            <p class="score-text">Your Score: <span id="finalScore">0</span>%</p>
+            <p class="score-message" id="scoreMessage"></p>
+            <button id="closeScoreBtn" class="cta-button">Continue Training</button>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <!-- <script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
 </body>
 </html>
