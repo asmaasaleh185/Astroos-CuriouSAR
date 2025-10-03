@@ -773,6 +773,19 @@ console.log("%cExplore the cosmos of radar technology and Earth observation", "c
 
 
 // ===== GUIDED TOUR SYSTEM =====
+const tourOverlay = document.getElementById("tourOverlay");
+const tourTooltip = document.getElementById("tourTooltip");
+const startTourBtn = document.getElementById("startTourBtn");
+const tourPrevBtn = document.getElementById("tourPrevBtn");
+const tourNextBtn = document.getElementById("tourNextBtn");
+const tourSkipBtn = document.getElementById("tourSkipBtn");
+const tourStepNumber = document.getElementById("tourStepNumber");
+const tourTotalSteps = document.getElementById("tourTotalSteps");
+const tourTitle = document.getElementById("tourTitle");
+const tourDescription = document.getElementById("tourDescription");
+
+let currentTourStep = 0;
+
 const tourSteps = [
   {
     element: ".mission-header",
@@ -809,142 +822,236 @@ const tourSteps = [
       "Click any module card to begin. You'll navigate through multiple pages, view diagrams, and complete quizzes. Your progress is tracked with visual indicators.",
     position: "top",
   },
-]
+];
+
+// helper to wait (used to allow smooth scroll to settle)
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function startTour() {
-  currentTourStep = 0
-  tourOverlay.classList.remove("hidden")
-  tourTooltip.classList.remove("hidden")
-  document.body.style.overflow = "hidden"
-  showTourStep(currentTourStep)
+  currentTourStep = 0;
+  if (tourOverlay) tourOverlay.classList.remove("hidden");
+  if (tourTooltip) tourTooltip.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  showTourStep(currentTourStep);
 }
 
 function endTour() {
-  tourOverlay.classList.add("hidden")
-  tourTooltip.classList.add("hidden")
-  document.body.style.overflow = ""
-  document.querySelectorAll(".tour-highlight").forEach((el) => el.classList.remove("tour-highlight"))
+  if (tourOverlay) tourOverlay.classList.add("hidden");
+  if (tourTooltip) tourTooltip.classList.add("hidden");
+  document.body.style.overflow = "";
+  document.querySelectorAll(".tour-highlight").forEach((el) => el.classList.remove("tour-highlight"));
 }
 
-function showTourStep(stepIndex) {
-  const step = tourSteps[stepIndex]
-  const element = document.querySelector(step.element)
+async function showTourStep(stepIndex) {
+  const step = tourSteps[stepIndex];
+  if (!step) return;
 
+  // find target element
+  const element = document.querySelector(step.element);
   if (!element) {
-    console.error("[v0] Tour element not found:", step.element)
-    return
+    console.error("[v0] Tour element not found:", step.element);
+    return;
   }
 
   // Update tooltip content
-  tourStepNumber.textContent = stepIndex + 1
-  tourTotalSteps.textContent = tourSteps.length
-  tourTitle.textContent = step.title
-  tourDescription.textContent = step.description
+  if (tourStepNumber) tourStepNumber.textContent = stepIndex + 1;
+  if (tourTotalSteps) tourTotalSteps.textContent = tourSteps.length;
+  if (tourTitle) tourTitle.textContent = step.title;
+  if (tourDescription) tourDescription.textContent = step.description;
 
   // Update button states
-  tourPrevBtn.disabled = stepIndex === 0
-  tourNextBtn.textContent = stepIndex === tourSteps.length - 1 ? "Finish Tour" : "Next →"
+  if (tourPrevBtn) tourPrevBtn.disabled = stepIndex === 0;
+  if (tourNextBtn) tourNextBtn.textContent = stepIndex === tourSteps.length - 1 ? "Finish Tour" : "Next →";
 
-  // Highlight element
-  document.querySelectorAll(".tour-highlight").forEach((el) => el.classList.remove("tour-highlight"))
-  element.classList.add("tour-highlight")
+  // highlight element
+  document.querySelectorAll(".tour-highlight").forEach((el) => el.classList.remove("tour-highlight"));
+  element.classList.add("tour-highlight");
 
-  // Position spotlight
-  const rect = element.getBoundingClientRect()
-  const spotlight = document.querySelector(".tour-spotlight")
-  spotlight.style.top = `${rect.top - 10}px`
-  spotlight.style.left = `${rect.left - 10}px`
-  spotlight.style.width = `${rect.width + 20}px`
-  spotlight.style.height = `${rect.height + 20}px`
-
-  // Position tooltip
-  positionTooltip(element, step.position)
-
-  // Scroll element into view
-  element.scrollIntoView({ behavior: "smooth", block: "center" })
-}
-function positionTooltip(element, position) {
-  const rect = element.getBoundingClientRect()
-  const tooltipRect = tourTooltip.getBoundingClientRect()
-  const padding = 20
-
-  // Remove all position classes
-  tourTooltip.classList.remove("position-top", "position-bottom", "position-left", "position-right")
-
-  let top, left
-
-  switch (position) {
-    case "bottom":
-      top = rect.bottom + padding
-      left = rect.left + rect.width / 2 - tooltipRect.width / 2
-      tourTooltip.classList.add("position-bottom")
-      break
-    case "top":
-      top = rect.top - tooltipRect.height - padding
-      left = rect.left + rect.width / 2 - tooltipRect.width / 2
-      tourTooltip.classList.add("position-top")
-      break
-    case "left":
-      top = rect.top + rect.height / 2 - tooltipRect.height / 2
-      left = rect.left - tooltipRect.width - padding
-      tourTooltip.classList.add("position-left")
-      break
-    case "right":
-      top = rect.top + rect.height / 2 - tooltipRect.height / 2
-      left = rect.right + padding
-      tourTooltip.classList.add("position-right")
-      break
-    default:
-      top = rect.bottom + padding
-      left = rect.left + rect.width / 2 - tooltipRect.width / 2
-      tourTooltip.classList.add("position-bottom")
+  // Bring element into view first (smooth). Wait briefly so layout updates.
+  try {
+    element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  } catch (e) {
+    // fallback if scrollIntoView options unsupported
+    element.scrollIntoView();
   }
 
-  // Keep tooltip within viewport
-  const maxLeft = window.innerWidth - tooltipRect.width - 20
-  const maxTop = window.innerHeight - tooltipRect.height - 20
-  left = Math.max(20, Math.min(left, maxLeft))
-  top = Math.max(20, Math.min(top, maxTop))
+  // wait for smooth scroll to finish
+  await wait(350);
 
-  tourTooltip.style.top = `${top}px`
-  tourTooltip.style.left = `${left}px`
+  // Now compute bounding rect and position spotlight & tooltip
+  const rect = element.getBoundingClientRect();
+  const spotlight = tourOverlay ? tourOverlay.querySelector(".tour-spotlight") : document.querySelector(".tour-spotlight");
+  if (!spotlight) return;
+
+  // mirror element border-radius so the spotlight cutout matches cards/rounded items
+  const computed = window.getComputedStyle(element);
+  spotlight.style.borderRadius = computed.borderRadius || "12px";
+
+  // offset so border doesn't overlap target
+  const pad = 10;
+  spotlight.style.top = `${rect.top - pad}px`;
+  spotlight.style.left = `${rect.left - pad}px`;
+  spotlight.style.width = `${Math.max(0, rect.width + pad * 2)}px`;
+  spotlight.style.height = `${Math.max(0, rect.height + pad * 2)}px`;
+
+  // ensure spotlight and overlay are visible 
+  spotlight.style.display = "block";
+
+  // Position tooltip after spotlight measured (use requestAnimationFrame to ensure layout)
+  requestAnimationFrame(() => {
+    positionTooltip(element, step.position);
+  });
 }
 
+function rectsOverlap(a, b) {
+  return !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom);
+}
+
+function computeTooltipCoordsFor(position, rect, tipW, tipH, padding) {
+  let top = 0, left = 0;
+  switch (position) {
+    case "bottom":
+      top = rect.bottom + padding;
+      left = rect.left + rect.width / 2 - tipW / 2;
+      break;
+    case "top":
+      top = rect.top - tipH - padding;
+      left = rect.left + rect.width / 2 - tipW / 2;
+      break;
+    case "left":
+      top = rect.top + rect.height / 2 - tipH / 2;
+      left = rect.left - tipW - padding;
+      break;
+    case "right":
+      top = rect.top + rect.height / 2 - tipH / 2;
+      left = rect.right + padding;
+      break;
+    default:
+      top = rect.bottom + padding;
+      left = rect.left + rect.width / 2 - tipW / 2;
+  }
+  return { top, left };
+}
+
+function positionTooltip(element, preferred = "bottom") {
+  const rect = element.getBoundingClientRect();
+  // Ensure tooltip is visible for measurement
+  tourTooltip.classList.remove("hidden");
+  // Measure tooltip size
+  const tipW = tourTooltip.offsetWidth;
+  const tipH = tourTooltip.offsetHeight;
+  const padding = 20;
+
+  // candidate order: preferred first, then others
+  const allPositions = [preferred, "bottom", "top", "right", "left"];
+  const tried = new Set();
+  let chosen = null;
+  let coords = null;
+
+  for (const pos of allPositions) {
+    if (tried.has(pos)) continue;
+    tried.add(pos);
+
+    const c = computeTooltipCoordsFor(pos, rect, tipW, tipH, padding);
+
+    // tooltip rect at this candidate position
+    const tipRect = {
+      top: c.top,
+      left: c.left,
+      right: c.left + tipW,
+      bottom: c.top + tipH,
+    };
+
+    // keep within viewport check
+    const fitsHorizontally = c.left >= 20 && (c.left + tipW) <= (window.innerWidth - 20);
+    const fitsVertically = c.top >= 20 && (c.top + tipH) <= (window.innerHeight - 20);
+
+    // avoid overlapping the target element
+    const overlaps = rectsOverlap(tipRect, rect);
+
+    if (!overlaps && fitsHorizontally && fitsVertically) {
+      chosen = pos;
+      coords = c;
+      break;
+    }
+  }
+
+  // If nothing cleanly fits, pick the preferred and clamp within viewport,
+  // but ensure it sits outside the target (try bottom then top etc).
+  if (!chosen) {
+    // try to place just outside bottom or top first
+    const fallbackOrder = ["bottom", "top", "right", "left"];
+    for (const pos of fallbackOrder) {
+      const c = computeTooltipCoordsFor(pos, rect, tipW, tipH, padding);
+      // Clamp inside viewport
+      c.left = Math.max(20, Math.min(c.left, window.innerWidth - tipW - 20));
+      c.top = Math.max(20, Math.min(c.top, window.innerHeight - tipH - 20));
+
+      const tipRect = { top: c.top, left: c.left, right: c.left + tipW, bottom: c.top + tipH };
+      if (!rectsOverlap(tipRect, rect)) {
+        chosen = pos;
+        coords = c;
+        break;
+      }
+    }
+
+    // If still overlapping, force preferred with clamping (at least it won't overflow viewport)
+    if (!chosen) {
+      const c = computeTooltipCoordsFor(preferred, rect, tipW, tipH, padding);
+      c.left = Math.max(20, Math.min(c.left, window.innerWidth - tipW - 20));
+      c.top = Math.max(20, Math.min(c.top, window.innerHeight - tipH - 20));
+      chosen = preferred;
+      coords = c;
+    }
+  }
+
+  // Remove previous position classes and set chosen class if any
+  tourTooltip.classList.remove("position-top", "position-bottom", "position-left", "position-right");
+  if (chosen === "top") tourTooltip.classList.add("position-top");
+  else if (chosen === "bottom") tourTooltip.classList.add("position-bottom");
+  else if (chosen === "left") tourTooltip.classList.add("position-left");
+  else if (chosen === "right") tourTooltip.classList.add("position-right");
+
+  // apply coordinates
+  tourTooltip.style.top = `${coords.top}px`;
+  tourTooltip.style.left = `${coords.left}px`;
+}
+
+
+/* ===== Tour controls wiring ===== */
 if (startTourBtn) {
-  startTourBtn.addEventListener("click", startTour)
+  startTourBtn.addEventListener("click", startTour);
 }
-
 if (tourPrevBtn) {
   tourPrevBtn.addEventListener("click", () => {
     if (currentTourStep > 0) {
-      currentTourStep--
-      showTourStep(currentTourStep)
+      currentTourStep--;
+      showTourStep(currentTourStep);
     }
-  })
+  });
 }
-
 if (tourNextBtn) {
   tourNextBtn.addEventListener("click", () => {
     if (currentTourStep < tourSteps.length - 1) {
-      currentTourStep++
-      showTourStep(currentTourStep)
+      currentTourStep++;
+      showTourStep(currentTourStep);
     } else {
-      endTour()
+      endTour();
     }
-  })
+  });
 }
-
 if (tourSkipBtn) {
-  tourSkipBtn.addEventListener("click", endTour)
+  tourSkipBtn.addEventListener("click", endTour);
 }
-
-// Close tour when clicking overlay (but not spotlight)
 if (tourOverlay) {
   tourOverlay.addEventListener("click", (e) => {
+    // close only when clicking the overlay (not the spotlight/tooltip)
     if (e.target === tourOverlay) {
-      endTour()
+      endTour();
     }
-  })
+  });
 }
 
 // ===== Gharabawy UPDATED MODULE DATA WITH IMAGE SKELETONS =====
