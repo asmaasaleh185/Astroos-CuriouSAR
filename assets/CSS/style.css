@@ -1,15 +1,15 @@
 :root {
-  --nasa-blue: #0b3d91;
-  --nasa-red: #fc3d21;
+  --nasa-neon-green: #00ff88;
   --nasa-dark: #061a40;
-  --nasa-light: #e8f4f8;
-  --accent-glow: rgba(11, 61, 145, 0.7);
+  --accent-glow: rgb(0, 255, 136, 0.7);
   --orb-size: 600px;
   --orb-offset-right: -90px;
   --radar-rotate-duration: 4s;
   --radar-wedge-angle: 18deg;
-  --radar-wedge-glow: rgba(11, 61, 145, 0.22);
-  --radar-wedge-falloff: rgba(11, 61, 145, 0.1);
+  --radar-wedge-glow: rgb(0, 255, 136, 0.22);
+  --radar-wedge-falloff: rgb(0, 255, 136, 0.1);
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Rajdhani", sans-serif;
 }
 
 * {
@@ -20,9 +20,9 @@
 
 html,
 body {
-  font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  font-family: var(--font-body);
   scroll-behavior: smooth;
-  color: var(--nasa-light);
+  color: var(--nasa-neon-green);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
@@ -123,9 +123,9 @@ body {
   left: 50%;
   width: 30%;
   height: 30%;
-  border: 2px solid var(--nasa-blue);
+  border: 2px solid var(--nasa-neon-green);
   border-radius: 50%;
-  box-shadow: 0 0 20px var(--nasa-blue);
+  box-shadow: 0 0 20px var(--nasa-neon-green);
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -141,10 +141,10 @@ body {
   left: 50%;
   width: 70%;
   height: 70%;
-  border: 1px solid var(--nasa-blue);
+  border: 1px solid var(--nasa-neon-green);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 15px var(--nasa-blue);
+  box-shadow: 0 0 15px var(--nasa-neon-green);
 }
 
 /* Radar sweep effect */
@@ -203,12 +203,12 @@ body {
 }
 
 #landing .content h1 {
-  font-size: 3.2rem;
+  font-size: 4.2rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 20px;
-  text-shadow: 0 0 15px var(--nasa-light);
-  background: linear-gradient(to right, #ffffff, var(--nasa-light));
+  text-shadow: 0 0 15px var(--nasa-neon-green);
+  background: linear-gradient(to right, #ffffff, var(--nasa-neon-green));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -248,13 +248,13 @@ p {
   font-size: 1.2rem;
   font-weight: 600;
   background: transparent;
-  color: white;
-  border: 2px solid var(--nasa-red);
+  color: #fff;
+  border: 2px solid var(--nasa-neon-green);
   border-radius: 4px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 2px;
-  box-shadow: 0 0 15px var(--nasa-red);
+  box-shadow: 0 0 15px var(--nasa-neon-green);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -270,16 +270,16 @@ p {
   height: 100%;
   background: linear-gradient(90deg,
       transparent,
-      rgba(252, 61, 33, 0.4),
+      rgb(0, 255, 136, 0.4),
       transparent);
   transition: left 0.5s;
   z-index: -1;
 }
 
 .explore-btn:hover {
-  background: var(--nasa-red);
+  background: var(--nasa-neon-green);
   color: white;
-  box-shadow: 0 0 25px var(--nasa-red);
+  box-shadow: 0 0 25px var(--nasa-neon-green);
 }
 
 .explore-btn:hover::before {
@@ -341,12 +341,13 @@ p {
 /* Typewriter effect */
 .sar-animated {
   display: inline-block;
-  border-right: 2px solid var(--nasa-blue);
+  border-right: 2px solid var(--nasa-neon-green);
+  color: var(--nasa-neon-green);
   white-space: nowrap;
   overflow: hidden;
   width: 0;
   animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
-  -webkit-animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
+  -webkit-animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite, shadowPulse 4s ease-in-out infinite;
 }
 
 @keyframes typing {
@@ -368,16 +369,16 @@ p {
 /* Shadow pulse */
 @keyframes shadowPulse {
   0% {
-    text-shadow: 0 0 5px var(--nasa-dark), 0 0 10px var(--nasa-blue);
+    text-shadow: 0 0 5px var(--nasa-dark), 0 0 10px var(--nasa-neon-green);
   }
 
   50% {
-    text-shadow: 0 0 20px var(--nasa-blue), 0 0 40px var(--nasa-dark),
+    text-shadow: 0 0 20px var(--nasa-neon-green), 0 0 40px var(--nasa-dark),
       0 0 60px var(--accent);
   }
 
   100% {
-    text-shadow: 0 0 5px var(--nasa-dark), 0 0 10px var(--nasa-blue);
+    text-shadow: 0 0 5px var(--nasa-dark), 0 0 10px var(--nasa-neon-green);
   }
 }
 
@@ -413,7 +414,7 @@ p {
 }
 
 .slide .year {
-  color: var(--nasa-red);
+  color: var(--nasa-neon-green);
   font-size: 1.4rem;
   margin-bottom: 10px;
 }
@@ -466,8 +467,8 @@ p {
 .dot.active,
 .controls button:hover,
 .dot:hover {
-  background: var(--nasa-red);
-  box-shadow: 0 0 10px rgba(252, 61, 33, 0.3);
+  background: var(--nasa-neon-green);
+  box-shadow: 0 0 10px rgb(0, 255, 136, 0.3);
   transform: translateY(-3px);
 }
 
@@ -488,7 +489,7 @@ button:focus {
   font-weight: 600;
   color: white;
   text-decoration: none;
-  border: 2px solid var(--nasa-blue);
+  border: 2px solid var(--nasa-neon-green);
   border-radius: 8px;
   background: rgba(11, 61, 145, 0.2);
   box-shadow: 0 0 20px rgba(11, 61, 145, 0.5);
@@ -506,14 +507,14 @@ button:focus {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, var(--nasa-red), transparent);
+  background: linear-gradient(90deg, transparent, var(--nasa-neon-green), transparent);
   transition: left 0.6s;
 }
 
 .details-btn:hover {
-  background: var(--nasa-red);
-  border-color: var(--nasa-red);
-  box-shadow: 0 0 30px var(--nasa-red);
+  background: var(--nasa-neon-green);
+  border-color: var(--nasa-neon-green);
+  box-shadow: 0 0 30px var(--nasa-neon-green);
   transform: scale(1.05);
 }
 
@@ -549,13 +550,6 @@ button:focus {
   -webkit-animation: float 6s ease-in-out infinite, pulseGlow 3s ease-in-out infinite alternate;
 }
 
-.floating-img:hover {
-  transform: translateY(-10px) rotate(-1deg) scale(1.05);
-  filter: drop-shadow(0 50px 90px rgba(3, 12, 40, 0.7), 0 0 40px var(--nasa-blue));
-  -webkit-filter: drop-shadow(0 50px 90px rgba(3, 12, 40, 0.7), 0 0 40px var(--nasa-blue));
-}
-
-
 /* magical expanding rings around the frame */
 .image-frame::before,
 .image-frame::after {
@@ -572,7 +566,7 @@ button:focus {
 .image-frame::before {
   width: 80%;
   height: 80%;
-  border: 2px solid var(--nasa-blue);
+  border: 2px solid var(--nasa-neon-green);
   box-shadow: 0 0 12px rgba(11, 61, 145, 0.25), 0 0 30px var(--accent-glow);
   animation: expandRing 5s ease-out infinite;
 }
@@ -611,7 +605,7 @@ button:focus {
   }
 
   100% {
-    filter: drop-shadow(0 60px 120px rgba(3, 12, 40, 0.6), 0 0 60px var(--nasa-blue), 0 0 90px var(--accent-glow));
+    filter: drop-shadow(0 60px 120px rgba(3, 12, 40, 0.6), 0 0 60px var(--nasa-neon-green), 0 0 90px var(--accent-glow));
     transform: scale(1.02);
     -webkit-filter: drop-shadow(0 60px 120px rgba(3, 12, 40, 0.6), 0 0 60px var(--nasa-blue), 0 0 90px var(--accent-glow));
 
