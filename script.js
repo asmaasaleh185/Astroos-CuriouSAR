@@ -97,7 +97,8 @@ const moduleData = {
         <img src="https://eo.belspo.be/sites/default/files/images/teledetection/Spot-Visee-oblique-et-stereo-images-3D_EN.jpg" alt="Temporal resolution" width="500"/>
         <h3>Spectral Resolution</h3>
         <p>The number and width of wavelength bands a sensor can detect. More bands provide richer information about surface materials.</p>
-        <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Aquatic%20Remote%20Sensing%20-%20Examples%20of%20spectral%20resolution.png" alt="Spectral resolution" width="200" style="margin-left:410px;"/>
+        <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Aquatic%20Remote%20Sensing%20-%20Examples%20of%20spectral%20resolution.png" alt="Spectral resolution" width="200" style="margin-left:410
+        px;"/>
         <h3>Radiometric Resolution</h3>
         <p>The sensitivity to differences in energy levels. Higher radiometric resolution allows detection of subtle variations in surface properties.</p>
         <img src="https://earthdatascience.org/images/courses/earth-analytics/remote-sensing/spectrumZoomed.png" alt="Radiometric resolution" width="500"/>
