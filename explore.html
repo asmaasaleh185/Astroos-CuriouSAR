@@ -62,7 +62,7 @@
                 <div class="card-status">MODULE 03</div>
             </div>
 
-            <div class="learning-card" data-topic="applications" data-tour-step="4">
+            <div class="learning-card" data-redirect="practical-applications.html" data-topic="applications" data-tour-step="4">
                 <div class="card-icon">🌍</div>
                 <h3>Practical Applications</h3>
                 <p>Among countless places we could have studied, we chose Derna.</p>
@@ -143,12 +143,19 @@
     </div>
 
     <script src="assets/JS/explore.js"></script>
-    <!-- <script>
-  window.MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-    svg: { fontCache: 'global' }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".learning-card");
+
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const redirectUrl = card.getAttribute("data-redirect");
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
