@@ -2,9 +2,9 @@
 // This script handles the cinematic journey through a real-world disaster case study
 
 // Stage Management
-let currentStage = 0
-let selectedBranch = null
-const reflectionAnswers = []
+let currentStage = 0;
+let selectedBranch = null;
+const reflectionAnswers = [];
 
 // Stage Definitions
 const stages = [
@@ -47,17 +47,20 @@ const stages = [
     images: [
       {
         title: "Pre-Disaster Overview",
-        description: "Wide view of Derna showing the city layout and surrounding terrain.",
+        description:
+          "Wide view of Derna showing the city layout and surrounding terrain.",
         query: "aerial view of coastal city Derna Libya before flooding",
       },
       {
         title: "Infrastructure Detail",
-        description: "Closer view showing buildings, roads, and the dam system.",
+        description:
+          "Closer view showing buildings, roads, and the dam system.",
         query: "satellite image of urban infrastructure and dams in Derna",
       },
       {
         title: "Coastal Region",
-        description: "The Mediterranean coastline and river system through the city.",
+        description:
+          "The Mediterranean coastline and river system through the city.",
         query: "coastal satellite view of Derna Libya with river delta",
       },
     ],
@@ -107,7 +110,8 @@ const stages = [
   {
     id: "sar-analysis",
     title: "SAR ANALYSIS RESULTS",
-    description: "Based on your chosen path, here are the SAR analysis results from Sentinel-1 radar observations.",
+    description:
+      "Based on your chosen path, here are the SAR analysis results from Sentinel-1 radar observations.",
     type: "sar-analysis",
   },
   {
@@ -119,7 +123,8 @@ const stages = [
     questions: [
       {
         id: "q1",
-        question: "What is the primary advantage of SAR over optical imagery in disaster response?",
+        question:
+          "What is the primary advantage of SAR over optical imagery in disaster response?",
         options: [
           "SAR provides higher resolution images",
           "SAR can operate through clouds and at night",
@@ -130,7 +135,8 @@ const stages = [
       },
       {
         id: "q2",
-        question: "Based on the SAR analysis, what was the main cause of the catastrophic flooding in Derna?",
+        question:
+          "Based on the SAR analysis, what was the main cause of the catastrophic flooding in Derna?",
         options: [
           "Tsunami from the Mediterranean Sea",
           "Dam collapse during extreme rainfall",
@@ -152,82 +158,84 @@ const stages = [
       },
     ],
   },
-]
+];
 
 // Initialize the application
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("[v0] Practical Applications initialized")
+  console.log("[v0] Practical Applications initialized");
 
   // Show loading state for 3 seconds
   setTimeout(() => {
-    hideLoading()
-    showStage(0)
-  }, 3000)
+    hideLoading();
+    showStage(0);
+  }, 3000);
 
   // Setup navigation buttons
-  document.getElementById("prevStageBtn").addEventListener("click", () => navigateStage(-1))
+  document
+    .getElementById("prevStageBtn")
+    .addEventListener("click", () => navigateStage(-1));
   // document.getElementById("nextStageBtn").addEventListener("click", () => navigateStage(1))
-})
+});
 
 // Hide loading state and show content
 function hideLoading() {
-  const loadingState = document.getElementById("loadingState")
-  const stageContainer = document.getElementById("stageContainer")
-  const stageNavigation = document.getElementById("stageNavigation")
-  const missionTimeline = document.getElementById("missionTimeline")
+  const loadingState = document.getElementById("loadingState");
+  const stageContainer = document.getElementById("stageContainer");
+  const stageNavigation = document.getElementById("stageNavigation");
+  const missionTimeline = document.getElementById("missionTimeline");
 
-  loadingState.style.display = "none"
-  stageContainer.classList.remove("hidden")
-  stageNavigation.classList.remove("hidden")
-  missionTimeline.classList.remove("hidden")
+  loadingState.style.display = "none";
+  stageContainer.classList.remove("hidden");
+  stageNavigation.classList.remove("hidden");
+  missionTimeline.classList.remove("hidden");
 }
 
 // Show specific stage
 function showStage(stageIndex) {
-  currentStage = stageIndex
-  const stage = stages[stageIndex]
-  const stageContainer = document.getElementById("stageContainer")
+  currentStage = stageIndex;
+  const stage = stages[stageIndex];
+  const stageContainer = document.getElementById("stageContainer");
 
   // Update timeline
-  updateTimeline()
+  updateTimeline();
 
   // Render stage content based on type
-  let content = ""
+  let content = "";
 
   switch (stage.type) {
     case "intro":
-      content = renderIntroStage(stage)
-      break
+      content = renderIntroStage(stage);
+      break;
     case "earth-globe":
-      content = renderEarthGlobeStage(stage)
-      break
+      content = renderEarthGlobeStage(stage);
+      break;
     case "region-info":
-      content = renderRegionInfoStage(stage)
-      break
+      content = renderRegionInfoStage(stage);
+      break;
     case "optical-images":
-      content = renderOpticalImagesStage(stage)
-      break
+      content = renderOpticalImagesStage(stage);
+      break;
     case "sar-intro":
-      content = renderSARIntroStage(stage)
-      break
+      content = renderSARIntroStage(stage);
+      break;
     case "branching-choice":
-      content = renderBranchingChoiceStage(stage)
-      break
+      content = renderBranchingChoiceStage(stage);
+      break;
     case "sar-analysis":
-      content = renderSARAnalysisStage(stage)
-      break
+      content = renderSARAnalysisStage(stage);
+      break;
     case "reflection":
-      content = renderReflectionStage(stage)
-      break
+      content = renderReflectionStage(stage);
+      break;
   }
 
-  stageContainer.innerHTML = content
+  stageContainer.innerHTML = content;
 
   // Update navigation buttons
-  updateNavigationButtons()
+  updateNavigationButtons();
 
   // Attach event listeners for interactive elements
-  attachStageEventListeners(stage)
+  attachStageEventListeners(stage);
 }
 
 // Render different stage types
@@ -243,43 +251,38 @@ function renderIntroStage(stage) {
         </p>
       </div>
     </div>
-  `
+  `;
 }
 
 function renderEarthGlobeStage(stage) {
   return `
-    <div class="stage-content">
-      <h1 class="stage-title">${stage.title}</h1>
+      <div class="video-layer visible" id="bgLayer" aria-hidden="false">
+    <video class="bg" id="bgVideo" autoplay muted loop playsinline preload="auto"
+        poster="assets/video/earth-poster.jpg">
+        <source src="assets/video/earth.mp4" type="video/mp4">
+        Your browser doesn't support the Earth background video.
+    </video>
+    <div class="video-overlay">
+        <h1 class="stage-title">${stage.title}</h1>
       <p class="stage-description">${stage.description}</p>
-      <div class="earth-globe-container">
-        <div class="globe-glow"></div>
-        <div class="earth-globe"></div>
-      </div>
-      <div style="text-align: center;">
-        <button class="action-button"">
-          <span>Go to Derna</span>
-          <span>🎯</span>
-        </button>
-      </div>
     </div>
-  `
+</div>
+  `;
 }
 
 function renderRegionInfoStage(stage) {
-  return `
-    <div class="stage-content zoom-in-animation">
-      <h1 class="stage-title">${stage.title}</h1>
-      <p class="stage-description">${stage.description}</p>
-      <div class="region-panel">
-        <h3>📍 ${stage.regionData.name}, ${stage.regionData.country}</h3>
-        <p><strong>Coordinates:</strong> ${stage.regionData.coordinates}</p>
-        <p><strong>Population:</strong> ${stage.regionData.population}</p>
-        <p><strong>Event:</strong> ${stage.regionData.event}</p>
-        <p style="margin-top: 1rem;">${stage.regionData.description}</p>
-      </div>
+    return `
+    <div class="video-layer visible" id="zoomLayer" aria-hidden="false">
+        <video class="zoom" id="zoomVideo" autoplay muted playsinline preload="auto"
+            poster="assets/video/derna-poster.jpg">
+            <source src="assets/video/derna-zoom.mp4" type="video/mp4">
+            <source src="assets/video/derna-zoom.webm" type="video/webm">
+            Your browser doesn't support the Derna zoom video.
+        </video>
     </div>
-  `
+    `;
 }
+
 
 function renderOpticalImagesStage(stage) {
   return `
@@ -295,7 +298,7 @@ function renderOpticalImagesStage(stage) {
             <h4>${img.title}</h4>
             <p>${img.description}</p>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
@@ -305,7 +308,7 @@ function renderOpticalImagesStage(stage) {
         </p>
       </div>
     </div>
-  `
+  `;
 }
 
 function renderSARIntroStage(stage) {
@@ -329,7 +332,7 @@ function renderSARIntroStage(stage) {
       </div>
       <div style="text-align: center; font-size: 6rem; margin: 2rem 0;">🛰️📡</div>
     </div>
-  `
+  `;
 }
 
 function renderBranchingChoiceStage(stage) {
@@ -346,12 +349,12 @@ function renderBranchingChoiceStage(stage) {
             <h3>${choice.title}</h3>
             <p>${choice.description}</p>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
     </div>
-  `
+  `;
 }
 
 function renderSARAnalysisStage(stage) {
@@ -362,18 +365,24 @@ function renderSARAnalysisStage(stage) {
           images: [
             {
               title: "Pre-Flood SAR Image",
-              description: "Sentinel-1 SAR image before the disaster showing normal water levels.",
-              query: "SAR satellite image of Derna before flooding dark areas water",
+              description:
+                "Sentinel-1 SAR image before the disaster showing normal water levels.",
+              query:
+                "SAR satellite image of Derna before flooding dark areas water",
             },
             {
               title: "Post-Flood SAR Image",
-              description: "SAR image after the flood showing extensive water coverage (dark areas indicate water).",
-              query: "SAR satellite image of Derna after flooding extensive dark water areas",
+              description:
+                "SAR image after the flood showing extensive water coverage (dark areas indicate water).",
+              query:
+                "SAR satellite image of Derna after flooding extensive dark water areas",
             },
             {
               title: "Flood Extent Map",
-              description: "Change detection analysis highlighting the flooded areas in red.",
-              query: "flood extent map SAR analysis Derna red highlighted flooded areas",
+              description:
+                "Change detection analysis highlighting the flooded areas in red.",
+              query:
+                "flood extent map SAR analysis Derna red highlighted flooded areas",
             },
           ],
           findings: [
@@ -388,17 +397,20 @@ function renderSARAnalysisStage(stage) {
           images: [
             {
               title: "Coherence Analysis",
-              description: "SAR coherence map showing structural changes (red = high change/damage).",
+              description:
+                "SAR coherence map showing structural changes (red = high change/damage).",
               query: "SAR coherence map infrastructure damage red areas Derna",
             },
             {
               title: "Building Damage",
-              description: "Detailed view of damaged buildings and collapsed structures.",
+              description:
+                "Detailed view of damaged buildings and collapsed structures.",
               query: "SAR image building damage collapsed structures Derna",
             },
             {
               title: "Dam Failure Site",
-              description: "SAR analysis of the dam collapse that caused the catastrophic flooding.",
+              description:
+                "SAR analysis of the dam collapse that caused the catastrophic flooding.",
               query: "SAR satellite image dam collapse failure site Derna",
             },
           ],
@@ -408,7 +420,7 @@ function renderSARAnalysisStage(stage) {
             "Critical infrastructure including bridges destroyed",
             "SAR coherence detected subtle ground deformation",
           ],
-        }
+        };
 
   return `
     <div class="stage-content">
@@ -423,18 +435,20 @@ function renderSARAnalysisStage(stage) {
             <h4>${img.title}</h4>
             <p>${img.description}</p>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
       <div style="background: rgba(0, 255, 136, 0.1); border: 2px solid var(--color-neon-green); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
         <h3 style="color: var(--color-neon-green); font-family: var(--font-display); margin-bottom: 1rem;">🔍 Key Findings</h3>
         <ul style="color: var(--color-soft-white); line-height: 2;">
-          ${branchContent.findings.map((finding) => `<li>${finding}</li>`).join("")}
+          ${branchContent.findings
+            .map((finding) => `<li>${finding}</li>`)
+            .join("")}
         </ul>
       </div>
     </div>
-  `
+  `;
 }
 
 function renderReflectionStage(stage) {
@@ -455,12 +469,12 @@ function renderReflectionStage(stage) {
                 <div class="reflection-option" data-option="${optIndex}">
                   ${option}
                 </div>
-              `,
+              `
                 )
                 .join("")}
             </div>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
@@ -476,136 +490,529 @@ function renderReflectionStage(stage) {
         </p>
       </div>
     </div>
-  `
+  `;
 }
 
 // Attach event listeners for interactive elements
 function attachStageEventListeners(stage) {
   if (stage.type === "branching-choice") {
-    const choiceCards = document.querySelectorAll(".choice-card")
+    const choiceCards = document.querySelectorAll(".choice-card");
     choiceCards.forEach((card) => {
       card.addEventListener("click", () => {
-        selectedBranch = card.dataset.choice
-        console.log("[v0] Selected branch:", selectedBranch)
-        navigateStage(1)
-      })
-    })
+        selectedBranch = card.dataset.choice;
+        console.log("[v0] Selected branch:", selectedBranch);
+        navigateStage(1);
+      });
+    });
   }
 
   if (stage.type === "reflection") {
-    const options = document.querySelectorAll(".reflection-option")
+    const options = document.querySelectorAll(".reflection-option");
     options.forEach((option) => {
-      option.addEventListener("click", handleReflectionAnswer)
-    })
+      option.addEventListener("click", handleReflectionAnswer);
+    });
   }
 }
 
 // Handle reflection question answers
 function handleReflectionAnswer(event) {
-  const option = event.target
-  const questionDiv = option.closest(".reflection-question")
-  const questionIndex = Number.parseInt(questionDiv.dataset.question)
-  const optionIndex = Number.parseInt(option.dataset.option)
-  const question = stages[currentStage].questions[questionIndex]
+  const option = event.target;
+  const questionDiv = option.closest(".reflection-question");
+  const questionIndex = Number.parseInt(questionDiv.dataset.question);
+  const optionIndex = Number.parseInt(option.dataset.option);
+  const question = stages[currentStage].questions[questionIndex];
 
   // Disable all options in this question
-  const allOptions = questionDiv.querySelectorAll(".reflection-option")
-  allOptions.forEach((opt) => opt.classList.add("disabled"))
+  const allOptions = questionDiv.querySelectorAll(".reflection-option");
+  allOptions.forEach((opt) => opt.classList.add("disabled"));
 
   // Mark selected
-  option.classList.add("selected")
+  option.classList.add("selected");
 
   // Store answer
   reflectionAnswers[questionIndex] = {
     selected: optionIndex,
     correct: question.correct,
-  }
+  };
 
   // Check if all questions answered
   if (reflectionAnswers.length === stages[currentStage].questions.length) {
-    showReflectionResults()
+    showReflectionResults();
   }
 }
 
 // Show reflection results
 function showReflectionResults() {
-  const correctCount = reflectionAnswers.filter((a) => a.selected === a.correct).length
-  const resultsDiv = document.getElementById("reflectionResults")
-  const scoreSpan = document.getElementById("reflectionScore")
+  const correctCount = reflectionAnswers.filter(
+    (a) => a.selected === a.correct
+  ).length;
+  const resultsDiv = document.getElementById("reflectionResults");
+  const scoreSpan = document.getElementById("reflectionScore");
 
-  scoreSpan.textContent = correctCount
-  resultsDiv.style.display = "block"
+  scoreSpan.textContent = correctCount;
+  resultsDiv.style.display = "block";
 
   // Enable next button
-  document.getElementById("nextStageBtn").disabled = false
+  document.getElementById("nextStageBtn").disabled = false;
 }
 
 // Navigate between stages
 function navigateStage(direction) {
- const stack = new Error().stack.split("\n")[2].trim()
-  console.log(`[v0] Navigate clicked: direction=${direction}, currentStage=${currentStage}, caller=${stack}`)
-  const newStage = currentStage + direction
-  console.log(`[v0] Calculated newStage=${newStage}`)
-
+  const stack = new Error().stack.split("\n")[2].trim();
+  console.log(
+    `[v0] Navigate clicked: direction=${direction}, currentStage=${currentStage}, caller=${stack}`
+  );
+  const newStage = currentStage + direction;
+  console.log(`[v0] Calculated newStage=${newStage}`);
 
   if (newStage >= 0 && newStage < stages.length) {
     // Special handling for branching
     if (currentStage === 5 && direction === 1 && !selectedBranch) {
-      alert("Please select an analysis path to continue.")
-      return
+      alert("Please select an analysis path to continue.");
+      return;
     }
-    console.log(`[v0] Showing stage index=${newStage}, type=${stages[newStage].type}`)
+    console.log(
+      `[v0] Showing stage index=${newStage}, type=${stages[newStage].type}`
+    );
 
-    showStage(newStage)
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    showStage(newStage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
 // Update timeline
 function updateTimeline() {
-  const timelineStages = document.querySelectorAll(".timeline-stage")
-  const progress = document.getElementById("timelineProgress")
+  const timelineStages = document.querySelectorAll(".timeline-stage");
+  const progress = document.getElementById("timelineProgress");
 
   timelineStages.forEach((stage, index) => {
-    stage.classList.remove("active", "completed")
+    stage.classList.remove("active", "completed");
     if (index < currentStage) {
-      stage.classList.add("completed")
+      stage.classList.add("completed");
     } else if (index === currentStage) {
-      stage.classList.add("active")
+      stage.classList.add("active");
     }
-  })
+  });
 
-  const progressPercent = (currentStage / (stages.length - 1)) * 100
-  progress.style.width = `${progressPercent}%`
+  const progressPercent = (currentStage / (stages.length - 1)) * 100;
+  progress.style.width = `${progressPercent}%`;
 }
 
 // Update navigation buttons
 function updateNavigationButtons() {
-  const prevBtn = document.getElementById("prevStageBtn")
-  const nextBtn = document.getElementById("nextStageBtn")
-    console.log(`[v0] Updating navigation buttons: currentStage=${currentStage}, stageType=${stages[currentStage].type}`)
+  const prevBtn = document.getElementById("prevStageBtn");
+  const nextBtn = document.getElementById("nextStageBtn");
+  console.log(
+    `[v0] Updating navigation buttons: currentStage=${currentStage}, stageType=${stages[currentStage].type}`
+  );
 
-
-  prevBtn.disabled = currentStage === 0
+  prevBtn.disabled = currentStage === 0;
 
   // Disable next button on reflection stage until all questions answered
   if (stages[currentStage].type === "reflection") {
-    nextBtn.disabled = reflectionAnswers.length < stages[currentStage].questions.length
-        console.log(`[v0] Reflection stage - nextBtn.disabled=${nextBtn.disabled}`)
-
+    nextBtn.disabled =
+      reflectionAnswers.length < stages[currentStage].questions.length;
+    console.log(`[v0] Reflection stage - nextBtn.disabled=${nextBtn.disabled}`);
   } else {
-    nextBtn.disabled = false
+    nextBtn.disabled = false;
   }
 
   // Change button text on last stage
   if (currentStage === stages.length - 1) {
-    nextBtn.querySelector(".nav-text").textContent = "Complete Mission"
+    nextBtn.querySelector(".nav-text").textContent = "Complete Mission";
     nextBtn.onclick = () => {
-      alert("Mission Complete! You can now return to the Learning Hub.")
-      window.location.href = "explore.html"
-    }
+      alert("Mission Complete! You can now return to the Learning Hub.");
+      window.location.href = "explore.html";
+    };
   } else {
-    nextBtn.querySelector(".nav-text").textContent = "Continue"
-    nextBtn.onclick = () => navigateStage(1)
+    nextBtn.querySelector(".nav-text").textContent = "Continue";
+    nextBtn.onclick = () => navigateStage(1);
   }
+}
+
+// Add this to your existing JavaScript file
+
+// Function to show the region popup at the end of the video
+function showRegionPopup(regionData) {
+    // Create popup overlay
+    const popupOverlay = document.createElement('div');
+    popupOverlay.className = 'popup-overlay';
+    document.body.appendChild(popupOverlay);
+
+    // Create popup content
+    const popup = document.createElement('div');
+    popup.className = 'video-end-popup';
+    popup.innerHTML = `
+        <div class="popup-header">
+            <h2 class="popup-title">REGION ANALYSIS COMPLETE</h2>
+            <p class="popup-subtitle">${regionData.name}, ${regionData.country}</p>
+        </div>
+        
+        <div class="popup-content">
+            <div class="popup-map-section">
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <div class="map-icon">🗺️</div>
+                        <div class="map-text">REGIONAL OVERVIEW</div>
+                        <div class="map-coordinates">${regionData.coordinates}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="popup-info-section">
+                <div class="region-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${regionData.population}</div>
+                        <div class="stat-label">Population</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Coastal</div>
+                        <div class="stat-label">Geography</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Urban</div>
+                        <div class="stat-label">Area Type</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">High Risk</div>
+                        <div class="stat-label">Flood Risk</div>
+                    </div>
+                </div>
+                
+                <p class="region-description">
+                    ${regionData.description}
+                </p>
+                
+                <div class="event-highlight">
+                    <div class="event-title">SEPTEMBER 2023 EVENT</div>
+                    <div class="event-details">
+                        ${regionData.event}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="popup-footer">
+            <button class="continue-button" id="continueFromPopup">
+                <span>CONTINUE ANALYSIS</span>
+                <span>→</span>
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    // Show popup with animation
+    setTimeout(() => {
+        popupOverlay.classList.add('active');
+        popup.classList.add('active');
+    }, 100);
+
+    // Add event listeners
+    const continueBtn = document.getElementById('continueFromPopup');
+    continueBtn.addEventListener('click', () => {
+        closeRegionPopup();
+        // Continue to next stage
+        if (typeof navigateStage === 'function') {
+            navigateStage(1);
+        }
+    });
+
+    // Close on overlay click
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+            closeRegionPopup();
+        }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function closeOnEscape(e) {
+        if (e.key === 'Escape') {
+            closeRegionPopup();
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+    });
+}
+
+// Function to close the popup
+function closeRegionPopup() {
+    const popup = document.querySelector('.video-end-popup');
+    const overlay = document.querySelector('.popup-overlay');
+
+    if (popup) {
+        popup.classList.remove('active');
+        overlay.classList.remove('active');
+        
+        setTimeout(() => {
+            popup.remove();
+            overlay.remove();
+        }, 400);
+    }
+}
+
+// Modify your existing region info stage to include video end detection
+function attachVideoEndListener() {
+    const zoomVideo = document.getElementById('zoomVideo');
+    if (zoomVideo) {
+        zoomVideo.addEventListener('ended', function() {
+            // Get current stage data
+            const currentStageData = stages.find(stage => stage.type === 'region-info');
+            if (currentStageData && currentStageData.regionData) {
+                // Show popup with region data
+                setTimeout(() => {
+                    showRegionPopup(currentStageData.regionData);
+                }, 1000); // 1 second delay after video ends
+            }
+        });
+    }
+}
+
+// Update your existing attachStageEventListeners function
+function attachStageEventListeners(stage) {
+    if (stage.type === 'region-info') {
+        // Wait for video to be loaded and attach end listener
+        setTimeout(attachVideoEndListener, 500);
+    }
+    
+    // ... rest of your existing event listener code
+}
+// Add these functions to your existing JavaScript
+
+// Function to create and show the clickable dot
+function createVideoEndDot(regionData) {
+    const videoLayer = document.getElementById('zoomLayer');
+    if (!videoLayer) return;
+
+    // Remove any existing dot
+    const existingDot = document.querySelector('.video-end-dot');
+    if (existingDot) existingDot.remove();
+
+    // Create the dot
+    const dot = document.createElement('div');
+    dot.className = 'video-end-dot';
+    dot.innerHTML = '●';
+    dot.style.cssText = `
+        position: absolute;
+        top: 45%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+    `;
+
+    // Create hint text
+    const hint = document.createElement('div');
+    hint.className = 'dot-hint';
+    hint.textContent = 'Click for region info';
+    
+    videoLayer.appendChild(dot);
+    videoLayer.appendChild(hint);
+
+    // Show dot and hint with delay
+    setTimeout(() => {
+        dot.classList.add('active');
+        setTimeout(() => {
+            hint.classList.add('active');
+        }, 500);
+    }, 500);
+
+    // Add click event to show popup
+    dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showRegionPopup(regionData, dot);
+    });
+
+    // Hide hint when dot is clicked
+    dot.addEventListener('click', () => {
+        hint.classList.remove('active');
+    });
+
+    return dot;
+}
+
+// Function to show the small scrollable popup
+function showRegionPopup(regionData, dotElement) {
+    // Remove any existing popup
+    const existingPopup = document.querySelector('.region-popup');
+    if (existingPopup) existingPopup.remove();
+
+    const videoLayer = document.getElementById('zoomLayer');
+    if (!videoLayer) return;
+
+    // Determine popup position based on dot position
+    const dotRect = dotElement.getBoundingClientRect();
+    const videoRect = videoLayer.getBoundingClientRect();
+    
+    let popupPosition = 'right';
+    let popupStyle = '';
+    
+    // Position popup to avoid going off-screen
+    if (dotRect.left > videoRect.width * 0.7) {
+        popupPosition = 'left';
+        popupStyle = `right: ${videoRect.width - dotRect.left + 20}px;`;
+    } else if (dotRect.top < videoRect.height * 0.3) {
+        popupPosition = 'bottom';
+        popupStyle = `left: ${dotRect.left - videoRect.left}px;`;
+    } else if (dotRect.top > videoRect.height * 0.7) {
+        popupPosition = 'top';
+        popupStyle = `left: ${dotRect.left - videoRect.left}px;`;
+    } else {
+        popupStyle = `left: ${dotRect.right - videoRect.left + 10}px`;
+    }
+
+    // Create popup
+    const popup = document.createElement('div');
+    popup.className = `region-popup ${popupPosition}`;
+    popup.style.cssText = popupStyle;
+    
+    popup.innerHTML = `
+        <button class="popup-close-btn" onclick="closeRegionPopup()">×</button>
+        <div class="popup-header">
+            <h3 class="popup-title">${regionData.name}</h3>
+            <p class="popup-subtitle">${regionData.country}</p>
+        </div>
+        
+        <div class="popup-scroll-content">
+            <div class="region-info">
+                <div class="region-stats-compact">
+                    <div class="stat-item-compact">
+                        <div class="stat-value-compact">${regionData.population}</div>
+                        <div class="stat-label-compact">Population</div>
+                    </div>
+                    <div class="stat-item-compact">
+                        <div class="stat-value-compact">Coastal</div>
+                        <div class="stat-label-compact">Geography</div>
+                    </div>
+                    <div class="stat-item-compact">
+                        <div class="stat-value-compact">${regionData.coordinates.split(' ')[0]}</div>
+                        <div class="stat-label-compact">Latitude</div>
+                    </div>
+                    <div class="stat-item-compact">
+                        <div class="stat-value-compact">${regionData.coordinates.split(' ')[2]}</div>
+                        <div class="stat-label-compact">Longitude</div>
+                    </div>
+                </div>
+                
+                <p class="region-description-compact">
+                    ${regionData.description}
+                </p>
+                
+                <div class="event-highlight-compact">
+                    <div class="event-title-compact">SEPTEMBER 2023</div>
+                    <div class="event-details-compact">
+                        ${regionData.event}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    `;
+
+    videoLayer.appendChild(popup);
+
+    // Show popup with animation
+    setTimeout(() => {
+        popup.classList.add('active');
+    }, 50);
+
+    // Close popup when clicking outside
+    const closeOnOutsideClick = (e) => {
+        if (!popup.contains(e.target) && e.target !== dotElement) {
+            closeRegionPopup();
+            document.removeEventListener('click', closeOnOutsideClick);
+        }
+    };
+
+    setTimeout(() => {
+        document.addEventListener('click', closeOnOutsideClick);
+    }, 100);
+
+    // Close on escape key
+    const closeOnEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeRegionPopup();
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+}
+
+// Function to close the popup
+function closeRegionPopup() {
+    const popup = document.querySelector('.region-popup');
+    if (popup) {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.remove();
+        }, 300);
+    }
+}
+
+// Function to continue to next stage from popup
+function continueFromPopup() {
+    closeRegionPopup();
+    
+    // Remove dot and hint
+    const dot = document.querySelector('.video-end-dot');
+    const hint = document.querySelector('.dot-hint');
+    if (dot) dot.remove();
+    if (hint) hint.remove();
+    
+    // Continue to next stage
+    if (typeof navigateStage === 'function') {
+        setTimeout(() => {
+            navigateStage(1);
+        }, 500);
+    }
+}
+
+// Update your existing video end detection
+function attachVideoEndListener() {
+    const zoomVideo = document.getElementById('zoomVideo');
+    if (zoomVideo) {
+        zoomVideo.addEventListener('ended', function() {
+            // Get current stage data
+            const currentStageData = stages.find(stage => stage.type === 'region-info');
+            if (currentStageData && currentStageData.regionData) {
+                // Create clickable dot instead of auto-showing popup
+                setTimeout(() => {
+                    createVideoEndDot(currentStageData.regionData);
+                }, 1000);
+            }
+        });
+
+        // Also hide any overlay text when video starts
+        zoomVideo.addEventListener('play', function() {
+            const overlay = document.querySelector('.video-overlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+    }
+}
+
+// Update your region info stage render function to ensure overlay is hidden
+function renderRegionInfoStage(stage) {
+    return `
+    <div class="video-layer visible" id="zoomLayer" aria-hidden="false">
+        <video class="zoom" id="zoomVideo" autoplay muted playsinline preload="auto"
+            poster="assets/video/derna-poster.jpg">
+            <source src="assets/video/derna-zoom.mp4" type="video/mp4">
+            <source src="assets/video/derna-zoom.webm" type="video/webm">
+            Your browser doesn't support the Derna zoom video.
+        </video>
+
+        <!-- This overlay will be hidden by CSS -->
+        <div class="video-overlay" id="overlayContent" style="display: none;">
+            <h1 class="stage-title">${stage.title}</h1>
+            <p class="stage-description">${stage.description}</p>
+            
+            <div class="region-panel">
+                <h3>📍 ${stage.regionData.name}, ${stage.regionData.country}</h3>
+                <p><strong>Coordinates:</strong> ${stage.regionData.coordinates}</p>
+                <p><strong>Population:</strong> ${stage.regionData.population}</p>
+                <p><strong>Event:</strong> ${stage.regionData.event}</p>
+                <p style="margin-top: 1rem;">${stage.regionData.description}</p>
+            </div>
+        </div>
+    </div>
+    `;
 }
