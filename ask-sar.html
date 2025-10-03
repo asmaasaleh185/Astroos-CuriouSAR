@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask SAR - AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for rendering equations -->
+    <script>
+      window.MathJax = {
+        tex: { 
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+</head>
+<body>
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <div class="nav-logo">
+            <span class="logo-icon">◉</span>
+            <span class="logo-text">SAR MISSION</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="explore.html">EXPLORE</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="gallery.html">GALLERY</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main class="ask-sar-section">
+        <div class="ask-sar-header">
+            <h1 class="section-title">ASK SAR AI ASSISTANT</h1>
+            <p class="section-subtitle">Communicate with the radar intelligence system</p>
+        </div>
+
+        <div class="ask-sar-container">
+            <div class="radar-visualization">
+                <div class="radar-circle-large">
+                    <div class="radar-pulse-ring"></div>
+                    <div class="radar-pulse-ring delay-1"></div>
+                    <div class="radar-pulse-ring delay-2"></div>
+                    <div class="radar-center">
+                        <span class="radar-icon">🤖</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-panel">
+                <label for="questionInput" class="input-label">ENTER YOUR QUESTION</label>
+                <textarea 
+                    id="questionInput" 
+                    class="question-input" 
+                    placeholder="Ask me anything about Remote Sensing, SAR, or satellite technology..."
+                    rows="4"
+                ></textarea>
+                <button id="submitBtn" class="submit-btn">
+                    <span class="btn-text">TRANSMIT QUERY</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+
+            <div id="loadingIndicator" class="loading-indicator hidden">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Processing your query...</p>
+            </div>
+
+            <div id="resultPanel" class="result-panel hidden">
+                <div class="result-header">
+                    <span class="result-icon">📡</span>
+                    <h3>RADAR RESPONSE</h3>
+                </div>
+                <div id="resultContent" class="result-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="ask-sar.js"></script>
+</body>
+</html>
