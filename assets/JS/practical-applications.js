@@ -26,7 +26,7 @@ const stages = [
     id: "derna-zoom",
     title: "DESTINATION: DERNA, LIBYA",
     description:
-      "We're zooming into Derna, a coastal city that experienced catastrophic flooding in September 2023. Let's examine this region before the disaster struck.",
+      "In the vast atlas of human struggle, it stands as a city scarred by destruction, yet alive with the indomitable spirit of its people. Where a river once whispered, a flood roared—but from the ruins, resilience rose, and hope endured. This is the story we now tell, through the gaze of radar",
     type: "region-info",
     regionData: {
       name: "Derna",
@@ -42,22 +42,25 @@ const stages = [
     id: "optical-images",
     title: "OPTICAL SATELLITE IMAGERY",
     description:
-      "This is what Derna looked like before the flood using optical satellite imagery. These images show us the visible spectrum – what our eyes would see from space.",
+      "Storm Daniel unleashed an onslaught of rain, flooding the Wadi Derna, and rupturing two aging dams under its pressure",
     type: "optical-images",
     images: [
       {
+        url : "https://media.discordapp.net/attachments/1420541479557795861/1421189227995074570/3840.webp?ex=68e15b9c&is=68e00a1c&hm=63169742a0bb99b5acb81414203245e8080e1dd2cc9208dc86592c82fc6eb3ae&=&format=webp&width=1250&height=704",
         title: "Pre-Disaster Overview",
-        description: "Wide view of Derna showing the city layout and surrounding terrain.",
+        description: "Derna rests in fragile stillness, unaware of the flood soon to come.",
         query: "aerial view of coastal city Derna Libya before flooding",
       },
       {
-        title: "Infrastructure Detail",
-        description: "Closer view showing buildings, roads, and the dam system.",
+        url:"assets/videos/vidMeteosat.mp4",
+        title: "Danial Storm",
+        description: "It wasn’t a mere storm",
         query: "satellite image of urban infrastructure and dams in Derna",
       },
       {
+        url : "https://cdn.discordapp.com/attachments/1420541479557795861/1421189307217084546/3840_1.webp?ex=68e15baf&is=68e00a2f&hm=b7b904b43ed5485781e9f222ec852b203651294b93159e09d2ffbaf2829f1728&",
         title: "Coastal Region",
-        description: "The Mediterranean coastline and river system through the city.",
+        description: "Where a river once whispered, a flood roared",
         query: "coastal satellite view of Derna Libya with river delta",
       },
     ],
@@ -85,22 +88,22 @@ const stages = [
     id: "branching-analysis",
     title: "CHOOSE YOUR ANALYSIS PATH",
     description:
-      "Now it's time to dive into the SAR analysis. You have two paths to explore. Both will give you valuable insights, but from different perspectives.",
+      "Now we step into the SAR analysis. Two paths unfold before us each offering valuable insights, each revealing a different perspective.",
     type: "branching-choice",
     choices: [
       {
         id: "flooding-extent",
         icon: "🌊",
-        title: "Analyze Flooding Extent",
+        title: "Flood Extent Analysis",
         description:
-          "Examine how far the water spread across the city and surrounding areas. Understand the scale of the disaster through water detection analysis.",
+          "We follow the flood’s path as it spilled across the city and its edges water detection mapping the breadth of a disaster that reshaped Derna’s story.",
       },
       {
         id: "infrastructure-damage",
         icon: "🏗️",
         title: "Assess Infrastructure Damage",
         description:
-          "Investigate the damage to buildings, roads, and critical infrastructure. Use SAR coherence analysis to detect structural changes.",
+          "To trace the wounds left on Derna’s streets, its homes, and its lifelines, we turn to SAR coherence—unveiling where the city’s structures have fallen silent.",
       },
     ],
   },
@@ -289,11 +292,15 @@ function renderOpticalImagesStage(stage) {
       <div class="image-grid">
         ${stage.images
           .map(
-            (img) => `
+            (media) => `
           <div class="image-panel">
-            <img src="/--encodeuricomponent-img-query--.jpg" alt="${img.title}">
-            <h4>${img.title}</h4>
-            <p>${img.description}</p>
+            ${
+              media.url.endsWith(".mp4")
+                ? `<video src="${media.url}" controls autoplay muted loop style="max-width: 100%; border-radius: 12px;"></video>`
+                : `<img src="${media.url}" alt="${media.title}" style="max-width: 100%; border-radius: 12px;">`
+            }
+            <h4>${media.title}</h4>
+            <p>${media.description}</p>
           </div>
         `,
           )
@@ -301,13 +308,12 @@ function renderOpticalImagesStage(stage) {
       </div>
       <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(255, 136, 0, 0.1); border: 2px solid rgba(255, 136, 0, 0.4); border-radius: 15px;">
         <p style="color: #ff8800; font-size: 1.1rem;">
-          ⚠️ <strong>Limitation:</strong> But you can't fully study and understand the disaster just through optical images...
+          ⚠️ Through optical images, the destruction becomes visible—flooded streets, shattered homes, scars etched into the city. Yet this is only what daylight permits, the surface of the story. To uncover the truths hidden beneath, we must turn to Sentinel-1 SAR—a gaze that pierces clouds and darkness, revealing what the eye cannot.
         </p>
       </div>
     </div>
   `
 }
-
 function renderSARIntroStage(stage) {
   return `
     <div class="stage-content">
@@ -315,12 +321,14 @@ function renderSARIntroStage(stage) {
       <p class="stage-description">${stage.description}</p>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
         <div style="background: rgba(255, 68, 68, 0.1); border: 2px solid rgba(255, 68, 68, 0.4); border-radius: 15px; padding: 2rem;">
+          <img src="assets/img/optical-images-cloudy.webp" alt="Optical vs SAR" style="width: 40%; border-radius: 12px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);">
           <h3 style="color: #ff4444; font-family: var(--font-display); margin-bottom: 1rem;">❌ Optical Limitations</h3>
           <ul style="color: var(--color-soft-white); line-height: 2;">
             ${stage.limitations.map((item) => `<li>${item}</li>`).join("")}
           </ul>
         </div>
         <div style="background: rgba(0, 255, 136, 0.1); border: 2px solid rgba(0, 255, 136, 0.4); border-radius: 15px; padding: 2rem;">
+          <img src="assets/img/=Sentinel-1_IW_VH_-_decibel_gamma0VsCloudy.png" alt="Optical vs SAR" style="width: 40%; border-radius: 12px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);">
           <h3 style="color: var(--color-neon-green); font-family: var(--font-display); margin-bottom: 1rem;">✓ SAR Advantages</h3>
           <ul style="color: var(--color-soft-white); line-height: 2;">
             ${stage.sarAdvantages.map((item) => `<li>${item}</li>`).join("")}
@@ -361,18 +369,22 @@ function renderSARAnalysisStage(stage) {
           title: "Flooding Extent Analysis",
           images: [
             {
+              
+              url:"assets/img/=Sentinel-1_IW_VH_-_decibel_gamma0VsCloudy.png",
               title: "Pre-Flood SAR Image",
-              description: "Sentinel-1 SAR image before the disaster showing normal water levels.",
+              description: "Through the gaze of Sentinel-1, Derna rests untouched. The river a steady thread, moments before the flood rewrote its story.",
               query: "SAR satellite image of Derna before flooding dark areas water",
             },
             {
+              url:"assets/img/SAR-Derna-BeforeImage.png",
               title: "Post-Flood SAR Image",
-              description: "SAR image after the flood showing extensive water coverage (dark areas indicate water).",
+              description: "After the storm, Sentinel-1 reveals Derna drowned in orange. The river no longer a thread, but a flood sprawling across the land.",
               query: "SAR satellite image of Derna after flooding extensive dark water areas",
             },
             {
+              url:"assets/img/After-Derna-image-SAR.png",
               title: "Flood Extent Map",
-              description: "Change detection analysis highlighting the flooded areas in red.",
+              description: "In dark orange, the flood’s footprint emerges. Scars traced across Derna, where water reshaped the city’s story.",
               query: "flood extent map SAR analysis Derna red highlighted flooded areas",
             },
           ],
@@ -387,46 +399,59 @@ function renderSARAnalysisStage(stage) {
           title: "Infrastructure Damage Assessment",
           images: [
             {
+              url:"assets/img/1-09-2023.jpg",
               title: "Coherence Analysis",
-              description: "SAR coherence map showing structural changes (red = high change/damage).",
+              description: "Before the flood, coherence reveals a city intact—its buildings standing, its patterns unbroken.",
               query: "SAR coherence map infrastructure damage red areas Derna",
             },
             {
+              url:"assets/img/1-10-2023.jpg",
               title: "Building Damage",
-              description: "Detailed view of damaged buildings and collapsed structures.",
+              description: "The map lays bare the city’s wounds—buildings fractured, structures collapsed, scars etched into the landscape.",
               query: "SAR image building damage collapsed structures Derna",
             },
             {
+              url:"assets/img/1-08-2025.jpg",
               title: "Dam Failure Site",
-              description: "SAR analysis of the dam collapse that caused the catastrophic flooding.",
+              description: "SAR analysis capturing Derna at the onset of recovery, where reconstruction begins to appear.",
               query: "SAR satellite image dam collapse failure site Derna",
             },
           ],
           findings: [
-            "Two major dams completely collapsed upstream",
-            "Over 1,000 buildings showed significant structural damage",
-            "Critical infrastructure including bridges destroyed",
-            "SAR coherence detected subtle ground deformation",
+            "Two major dams upstream completely collapsed.",
+            "Over 1,000 buildings suffered significant structural damage.",
+            "Critical infrastructure, including bridges, was destroyed.",
+            "SAR coherence detected subtle ground deformation.",
           ],
         }
 
   return `
     <div class="stage-content">
-      <h1 class="stage-title">${branchContent.title}</h1>
-      <p class="stage-description">${stage.description}</p>
-      <div class="image-grid">
-        ${branchContent.images
-          .map(
-            (img) => `
-          <div class="image-panel">
-            <img src="/--encodeuricomponent-img-query--.jpg" alt="${img.title}">
-            <h4>${img.title}</h4>
-            <p>${img.description}</p>
-          </div>
-        `,
-          )
-          .join("")}
-      </div>
+  <h1 class="stage-title">${branchContent.title}</h1>
+  <p class="stage-description">${stage.description}</p>
+  <div class="image-grid">
+    ${branchContent.images
+      .map(
+        (img) => `
+        <div class="image-panel">
+          <img src="${img.url}" alt="${img.title} image" style="max-width: 70%; border-radius: 12px;">
+          <h4>${img.title}</h4>
+          <p>${img.description}</p>
+        </div>
+      `,
+      )
+      .join("")}
+  </div>
+</div>
+
+<style>
+  .image-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;  
+  }
+</style>
       <div style="background: rgba(0, 255, 136, 0.1); border: 2px solid var(--color-neon-green); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
         <h3 style="color: var(--color-neon-green); font-family: var(--font-display); margin-bottom: 1rem;">🔍 Key Findings</h3>
         <ul style="color: var(--color-soft-white); line-height: 2;">
