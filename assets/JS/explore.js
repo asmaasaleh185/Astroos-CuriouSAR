@@ -816,6 +816,20 @@ const tourSteps = [
     position: "right",
   },
   {
+    element: '[data-topic="applications"]',
+    title: "Module 04: Practical Applications",
+    description:
+      "Discover the real-world uses of SAR technology in agriculture, disaster management, climate monitoring, and more. See how SAR is transforming our understanding of Earth.",
+    position: "right",
+  },
+  {
+    element: '[data-topic="ask"]',
+    title: "AI Assistant",
+    description:
+      "Ask SAR is an interactive assistant for quick, contextual answers about Synthetic Aperture Radar and remote sensing.",
+    position: "right",
+  },
+  {
     element: "#learningGrid",
     title: "Interactive Learning Experience",
     description:
