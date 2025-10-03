@@ -1,16 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CuriouSAR</title>
+  <title>CuriouSAR - NASA Space Apps Challenge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;600&family=Exo+2:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="assets/CSS/style.css">
 </head>
+
 <body>
+  <div class="space-background"></div>
+  <div class="stars" id="stars"></div>
+  <div class="earth-container">
+    <div class="earth"></div>
+    <div class="radar" aria-hidden="true">
+      <div class="radar-overlay"></div>
+    </div>
+  </div>
+  <section id="landing" class="fade-section show">
+    <div class="content">
+      <h1>CuriouSAR</h1>
+      <div class="subtitle">Radar Eyes for a Curious Earth</div>
+      <p> From orbit, clouds and night hide nothing. Synthetic Aperture Radar (SAR) cuts through darkness and storms,
+        revealing Earth's hidden patterns — oceans, cities, and change itself. Step into NASA's radar vision and
+        discover the unseen. </p> <button class="explore-btn" id="exploreBtn">Explore SAR History</button>
+  </section>
+
+  <section id="sar-history" aria-labelledby="sar-headline" class="fade-section">
+  <div class="history-wrap">
+    <div class="history-left">
+      <h2 class="sar-headline">
+        <span class="sar-animated">Brief History about SAR. . .</span>
+      </h2>
+      <div class="history-sub">
+        Each slide is a chapter — click arrows or let it play. Images float as if seen from orbit.
+      </div>
+
+      <div class="slides" aria-live="polite">
+        <div class="slides-viewport">
+          <div class="slides-track" id="slidesTrack">
+            <article class="slide" data-year="1960s">
+              <div class="year">1960s — The Spark</div>
+              <div class="desc">Early airborne radar experiments proved that coherent motion processing could create
+                high-resolution images. These aircraft tests became the seed for Synthetic Aperture Radar — the idea
+                that movement creates detail.</div>
+            </article>
+
+            <article class="slide" data-year="1978">
+              <div class="year">1978 — Seasat</div>
+              <div class="desc"><strong>Seasat</strong> was NASA's first ocean-observing SAR satellite. Though
+                short-lived, it demonstrated radar's ability to map waves, sea ice, and coastal features from space.
+              </div>
+            </article>
+
+            <article class="slide" data-year="1990s">
+              <div class="year">1990s — Shuttle & Science</div>
+              <div class="desc">Space Shuttle missions and improved processing revealed forests, hidden channels, and
+                subtle surface deformation — SAR became a scientific workhorse for geology and ecology.</div>
+            </article>
+
+            <article class="slide" data-year="Today">
+              <div class="year">Today — Sentinel & NISAR</div>
+              <div class="desc"><strong>Sentinel-1</strong> and upcoming missions like <strong>NISAR</strong> provide
+                continuous, global radar coverage — essential for monitoring climate, disasters, and Earth's changing
+                face.</div>
+            </article>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="prevBtn" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+          <button id="nextBtn" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+          <button id="playPause" class="play" aria-pressed="false"><i class="fas fa-pause"></i> Play</button>
+          <div class="dots" id="dots" role="tablist" aria-label="Slide navigation"></div>
+        </div>
+      </div>
+
+      <div class="more-details">
+        <a href="sar-details.html" class="details-btn">Learn More </a>
+      </div>
+    </div>
+
+    <div class="history-right" aria-hidden="false">
+      <div class="image-frame">
+        <img id="floatingImg" class="floating-img" src="assets/img/radar.png" alt="SAR satellite or radar view">
+      </div>
+    </div>
+  </div>
+</section>
 
   <script src="assets/JS/script.js"></script>
 </body>
+
 </html>
