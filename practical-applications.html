@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical Applications - SAR Mission Control</title>
+    <link rel="stylesheet" href="./assets/CSS/styles.css">
+    <link rel="stylesheet" href="practical-applications.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <div class="nav-logo">
+            <span class="logo-icon">◉</span>
+            <span class="logo-text">SAR MISSION</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="explore.html">EXPLORE</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="gallery.html">GALLERY</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mission Timeline Progress Bar -->
+    <div id="missionTimeline" class="mission-timeline hidden">
+        <div class="timeline-track">
+            <div class="timeline-progress" id="timelineProgress"></div>
+        </div>
+        <div class="timeline-stages">
+            <div class="timeline-stage active" data-stage="0">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Welcome</span>
+            </div>
+            <div class="timeline-stage" data-stage="1">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Earth View</span>
+            </div>
+            <div class="timeline-stage" data-stage="2">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Derna</span>
+            </div>
+            <div class="timeline-stage" data-stage="3">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Optical</span>
+            </div>
+            <div class="timeline-stage" data-stage="4">
+                <div class="stage-dot"></div>
+                <span class="stage-label">SAR Intro</span>
+            </div>
+            <div class="timeline-stage" data-stage="5">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Analysis</span>
+            </div>
+            <div class="timeline-stage" data-stage="6">
+                <div class="stage-dot"></div>
+                <span class="stage-label">Reflection</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Container -->
+    <main class="practical-app-container">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-animation">
+                <div class="orbit-ring"></div>
+                <div class="orbit-ring delay-1"></div>
+                <div class="orbit-ring delay-2"></div>
+                <div class="satellite-icon">🛰️</div>
+            </div>
+            <h2 class="loading-title">INITIALIZING MISSION</h2>
+            <p class="loading-subtitle">Preparing satellite data and mission parameters...</p>
+            <div class="loading-bar">
+                <div class="loading-bar-fill"></div>
+            </div>
+        </div>
+
+        <!-- Stage Container -->
+        <div id="stageContainer" class="stage-container hidden">
+            <!-- Stages will be dynamically rendered here -->
+        </div>
+
+        <!-- Navigation Controls -->
+        <div id="stageNavigation" class="stage-navigation hidden">
+            <button id="prevStageBtn" class="stage-nav-btn prev-stage-btn" disabled>
+                <span class="nav-arrow">←</span>
+                <span class="nav-text">Previous</span>
+            </button>
+            <button id="nextStageBtn" class="stage-nav-btn next-stage-btn">
+                <span class="nav-text">Continue</span>
+                <span class="nav-arrow">→</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="practical-applications.js"></script>
+</body>
+</html>

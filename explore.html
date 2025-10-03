@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="assets/CSS/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="stars-container">
@@ -62,7 +60,8 @@
                 <div class="card-status">MODULE 03</div>
             </div>
 
-            <div class="learning-card" data-topic="applications">
+            <!-- Updated Practical Applications card to link to new page -->
+            <div class="learning-card" data-topic="applications" data-redirect="practical-applications.html" data-tour-step="4">
                 <div class="card-icon">🌍</div>
                 <h3>Practical Applications</h3>
                 <p>Real-world uses from agriculture to disaster monitoring</p>
@@ -76,8 +75,8 @@
                 <div class="card-status">CHALLENGE</div>
             </div>
 
-            <!-- Added new Ask SAR card -->
-            <a href="ask-sar.html" class="learning-card ask-sar-card" data-tour-step="4">
+            <!-- Updated Ask SAR card tour step -->
+            <a href="ask-sar.html" class="learning-card ask-sar-card" data-tour-step="5" data-redirect="practical-applications.html">
                 <div class="card-icon">🤖</div>
                 <h3>Ask SAR</h3>
                 <p>A question and the radar will answer you in a moment</p>
@@ -116,13 +115,13 @@
         </div>
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-
+            
             <!-- Progress Indicator -->
             <div id="progressIndicator" class="progress-indicator"></div>
-
+            
             <!-- Module Content Container -->
             <div id="modalBody" class="modal-body"></div>
-
+            
             <!-- Navigation Buttons -->
             <div id="moduleNavigation" class="module-navigation">
                 <button id="prevBtn" class="nav-btn prev-btn">← Previous</button>
@@ -142,13 +141,21 @@
         </div>
     </div>
 
-    <script src="assets/JS/explore.js"></script>
-    <!-- <script>
-  window.MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-    svg: { fontCache: 'global' }
-  };
+    <script src="assets/JS/script.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".learning-card");
+
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        const redirectUrl = card.getAttribute("data-redirect");
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      });
+    });
+  });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
 </body>
 </html>
