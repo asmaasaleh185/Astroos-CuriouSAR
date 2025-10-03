@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ask SAR - AI Assistant</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/CSS/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- MathJax for rendering equations -->
     <script>
-      window.MathJax = {
-        tex: { 
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        },
-        svg: { fontCache: 'global' }
-      };
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 </head>
+
 <body>
     <div class="stars-container">
         <div class="stars"></div>
@@ -62,12 +66,9 @@
 
             <div class="question-panel">
                 <label for="questionInput" class="input-label">ENTER YOUR QUESTION</label>
-                <textarea 
-                    id="questionInput" 
-                    class="question-input" 
+                <textarea id="questionInput" class="question-input"
                     placeholder="Ask me anything about Remote Sensing, SAR, or satellite technology..."
-                    rows="4"
-                ></textarea>
+                    rows="4"></textarea>
                 <button id="submitBtn" class="submit-btn">
                     <span class="btn-text">TRANSMIT QUERY</span>
                     <span class="btn-icon">→</span>
@@ -89,6 +90,7 @@
         </div>
     </main>
 
-    <script src="ask-sar.js"></script>
+    <script src="assets/JS/ask-sar.js"></script>
 </body>
+
 </html>
