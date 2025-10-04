@@ -298,7 +298,7 @@ function renderOpticalImagesStage(stage) {
           <div class="image-panel">
             ${
               media.url.endsWith(".mp4")
-                ? `<video src="${media.url}" controls autoplay muted loop style="max-width: 100%; border-radius: 12px;"></video>`
+                ? `<video src="${media.url}" autoplay muted loop style="max-width: 100%; border-radius: 12px;"></video>`
                 : `<img src="${media.url}" alt="${media.title}" style="max-width: 100%; border-radius: 12px;">`
             }
             <h4>${media.title}</h4>
@@ -533,6 +533,10 @@ function attachStageEventListeners(stage) {
       option.addEventListener("click", handleReflectionAnswer);
     });
   }
+
+  if (stage.type === 'region-info') {
+        setTimeout(attachVideoEndListener, 500);
+    }
 }
 
 // Handle reflection question answers
@@ -788,18 +792,7 @@ function attachVideoEndListener() {
     }
 }
 
-// Update your existing attachStageEventListeners function
-function attachStageEventListeners(stage) {
-    if (stage.type === 'region-info') {
-        // Wait for video to be loaded and attach end listener
-        setTimeout(attachVideoEndListener, 500);
-    }
-    
-    // ... rest of your existing event listener code
-}
-// Add these functions to your existing JavaScript
 
-// Function to create and show the clickable dot
 function createVideoEndDot(regionData) {
     const videoLayer = document.getElementById('zoomLayer');
     if (!videoLayer) return;
