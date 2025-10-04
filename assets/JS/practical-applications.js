@@ -541,6 +541,7 @@ function attachStageEventListeners(stage) {
 
 // Handle reflection question answers
 function handleReflectionAnswer(event) {
+  if (event.target.classList.contains("disabled")) return;
   const option = event.target;
   const questionDiv = option.closest(".reflection-question");
   const questionIndex = Number.parseInt(questionDiv.dataset.question);
@@ -591,10 +592,13 @@ function navigateStage(direction) {
   console.log(`[v0] Calculated newStage=${newStage}`);
 
   if (newStage >= 0 && newStage < stages.length) {
-    // Special handling for branching
     if (currentStage === 5 && direction === 1 && !selectedBranch) {
-      alert("Please select an analysis path to continue.");
-      return;
+      document.getElementById("warningPopup").classList.remove("hidden");
+  document.getElementById("warningClose").onclick = () => {
+    document.getElementById("warningPopup").classList.add("hidden");
+  };
+
+  return;
     }
     console.log(
       `[v0] Showing stage index=${newStage}, type=${stages[newStage].type}`
@@ -643,19 +647,21 @@ function updateNavigationButtons() {
   }
 
   // Change button text on last stage
-  if (currentStage === stages.length - 1) {
-    nextBtn.querySelector(".nav-text").textContent = "Complete Mission";
-    nextBtn.onclick = () => {
-      alert("Mission Complete! You can now return to the Learning Hub.");
+if (currentStage === stages.length - 1) {
+  nextBtn.querySelector(".nav-text").textContent = "Complete Mission";
+  nextBtn.onclick = () => {
+    document.getElementById("missionPopup").classList.remove("hidden");
+
+    document.getElementById("popupClose").onclick = () => {
       window.location.href = "explore.html";
     };
-  } else {
-    nextBtn.querySelector(".nav-text").textContent = "Continue";
-    nextBtn.onclick = () => navigateStage(1);
-  }
+  };
+} else {
+  nextBtn.querySelector(".nav-text").textContent = "Continue";
+  nextBtn.onclick = () => navigateStage(1);
+}
 }
 
-// Add this to your existing JavaScript file
 
 // Function to show the region popup at the end of the video
 function showRegionPopup(regionData) {
