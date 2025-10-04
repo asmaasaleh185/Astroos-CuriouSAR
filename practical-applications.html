@@ -101,6 +101,39 @@
                 <span class="nav-arrow">→</span>
             </button>
         </div>
+        <!-- Warning Popup -->
+        <div id="warningPopup" class="popup-overlay hidden">
+            <div class="popup-window warning">
+                <div class="popup-header">
+                    <span class="popup-title">⚠️ Mission Control Alert</span>
+                </div>
+                <div class="popup-body">
+                    <h2>Path Not Selected</h2>
+                    <p>Please choose an <strong>analysis path</strong> to continue your mission, astronaut.</p>
+                </div>
+                <div class="popup-footer">
+                    <button id="warningClose">Acknowledge</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Complete Popup -->
+        <div id="missionPopup" class="popup-overlay hidden">
+            <div class="popup-window">
+                <div class="popup-header">
+                    <span class="popup-title">Mission Control</span>
+                </div>
+                <div class="popup-body">
+                    <h2>Mission Accomplished</h2>
+                    <p>Astronaut, you have successfully completed your SAR mission.<br>
+                        You may now return to the <strong>Learning Hub</strong>.</p>
+                </div>
+                <div class="popup-footer">
+                    <button id="popupClose">Return to Hub</button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script src="assets/JS/practical-applications.js"></script>

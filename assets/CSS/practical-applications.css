@@ -278,6 +278,7 @@
   font-size: 2.5rem;
   color: var(--color-neon-green);
   margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
   text-align: center;
   text-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
   position: relative;
@@ -1209,4 +1210,146 @@
     transform: translateX(-50%);
     border: 6px solid transparent;
     border-top-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Overlay background */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 10, 25, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+}
+
+/* Hide state */
+.popup-overlay.hidden {
+  display: none;
+}
+
+/* Starfield effect behind popup */
+.popup-overlay::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  animation: starDrift 60s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* Popup window */
+.popup-window {
+  background: linear-gradient(145deg, #0a0f1f, #111a33);
+  border: 2px solid var(--color-neon-green);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  width: 380px;
+  color: #fff;
+  box-shadow: 0 0 30px var(--color-neon-green);
+  animation: popupZoom 0.5s ease, popupGlow 2s infinite alternate;
+  position: relative;
+  z-index: 2;
+}
+
+/* Glow animation */
+@keyframes popupGlow {
+  from { box-shadow: 0 0 15px var(--color-neon-green); }
+  to { box-shadow: 0 0 40px var(--color-neon-green), 0 0 20px var(--color-gray-muted) inset; }
+}
+
+@keyframes popupZoom {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Header */
+.popup-header {
+  border-bottom: 1px solid rgba(0,255,247,0.4);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.popup-title {
+  font-size: 1.2rem;
+  color: var(--color-electric-cyan);
+  letter-spacing: 2px;
+}
+
+/* Body */
+.popup-body h2 {
+  color: var(--color-neon-green);
+  margin-bottom: 1rem;
+}
+
+.popup-body p {
+  font-size: 0.95rem;
+  color: #d6e4ff;
+  line-height: 1.5;
+}
+
+/* Footer */
+.popup-footer {
+  margin-top: 1.5rem;
+}
+
+.popup-footer button {
+  padding: 12px 22px;
+  background: linear-gradient(90deg, var(--color-soft-white), var(--color-neon-green));
+  border: none;
+  border-radius: 10px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.2s ease, box-shadow 0.3s;
+  box-shadow: 0 0 15px var(--color-neon-green);
+}
+
+.popup-footer button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px var(--color-neon-green), 0 0 40px var(--color-soft-white);
+}
+
+/* Different look for WARNING popup */
+.popup-window.warning {
+  border-color: #ff4c4c;
+  box-shadow: 0 0 30px #ff4c4c;
+  animation: popupZoom 0.5s ease, warningGlow 2s infinite alternate;
+}
+
+.popup-window.warning .popup-title {
+  color: #ff4c4c;
+}
+
+.popup-window.warning .popup-body h2 {
+  color: #ff8080;
+}
+
+/* Warning glow animation */
+@keyframes warningGlow {
+  from { box-shadow: 0 0 15px #ff4c4c; }
+  to { box-shadow: 0 0 30px #ff1a1a, 0 0 20px #ff8080 inset; }
+}
+
+.popup-footer button#warningClose {
+  background: linear-gradient(90deg, #ff4c4c, #ff8080);
+  box-shadow: 0 0 15px #ff4c4c;
+}
+
+.popup-footer button#warningClose:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #ff1a1a, 0 0 40px #ff8080;
 }
