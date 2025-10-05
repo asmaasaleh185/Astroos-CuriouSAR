@@ -93,14 +93,15 @@ const moduleData = {
         <p>The size of the smallest feature that can be detected. High-resolution satellites can see objects as small as 30cm, while weather satellites have resolutions of several kilometers.</p>
         <img src="https://gisgeography.com/wp-content/uploads/2015/10/Spatial-Resolution-Comparison.png" alt="Spatial resolution comparison" width="500"/>
         <h3>Temporal Resolution</h3>
-        <p>How often a sensor revisits the same location. Some satellites return daily, others every few weeks. This affects our ability to monitor rapid changes.</p>
-        <img src="https://eo.belspo.be/sites/default/files/images/teledetection/Spot-Visee-oblique-et-stereo-images-3D_EN.jpg" alt="Temporal resolution" width="500"/>
+        <p>Temporal resolution is the measure of how precisely a system or sensor records changes over time, typically represented as the minimum time interval between data acquisitions or the frequency at which repeated observations of the same location or event can be made.</p>
+        <img src="https://eo.belspo.be/sites/default/files/images/teledetection/Spot-Visee-oblique-et-stereo-images-3D_EN.jpg" alt="Temporal resolution" width="350"/>
         <h3>Spectral Resolution</h3>
         <p>The number and width of wavelength bands a sensor can detect. More bands provide richer information about surface materials.</p>
-        <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Aquatic%20Remote%20Sensing%20-%20Examples%20of%20spectral%20resolution.png" alt="Spectral resolution" width="200" style="margin-left:410px;"/>
+        <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Aquatic%20Remote%20Sensing%20-%20Examples%20of%20spectral%20resolution.png" alt="Spectral resolution" width="200" style="margin-left:350px;"/>
         <h3>Radiometric Resolution</h3>
-        <p>The sensitivity to differences in energy levels. Higher radiometric resolution allows detection of subtle variations in surface properties.</p>
-        <img src="https://earthdatascience.org/images/courses/earth-analytics/remote-sensing/spectrumZoomed.png" alt="Radiometric resolution" width="500"/>
+        <p>Radiometric resolution is a sensor's ability to detect and record minute differences in energy intensity (brightness).
+A high resolution is crucial for distinguishing subtle variations, like differences in vegetation health or water quality. </p>
+        <img src="assets/img/Radiometric.jpg" alt="Radiometric resolution" width="500"/>
       `,
     },
     {
