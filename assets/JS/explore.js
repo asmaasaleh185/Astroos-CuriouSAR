@@ -93,7 +93,7 @@ const moduleData = {
         <p>The size of the smallest feature that can be detected. High-resolution satellites can see objects as small as 30cm, while weather satellites have resolutions of several kilometers.</p>
         <img src="https://gisgeography.com/wp-content/uploads/2015/10/Spatial-Resolution-Comparison.png" alt="Spatial resolution comparison" width="500"/>
         <h3>Temporal Resolution</h3>
-        <p>How often a sensor revisits the same location. Some satellites return daily, others every few weeks. This affects our ability to monitor rapid changes.</p>
+        <p>Temporal resolution is the measure of how precisely a system or sensor records changes over time, typically represented as the minimum time interval between data acquisitions or the frequency at which repeated observations of the same location or event can be made.</p>
         <img src="https://eo.belspo.be/sites/default/files/images/teledetection/Spot-Visee-oblique-et-stereo-images-3D_EN.jpg" alt="Temporal resolution" width="350"/>
         <h3>Spectral Resolution</h3>
         <p>The number and width of wavelength bands a sensor can detect. More bands provide richer information about surface materials.</p>
