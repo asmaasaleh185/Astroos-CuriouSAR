@@ -86,9 +86,24 @@ async function callGemini(question) {
             {
               text: `You are SAR (Synthetic Aperture Radar) AI Assistant, an expert in remote sensing, satellite technology, and radar systems.
               
-Answer the following question in a clear, educational, and engaging way. Use technical accuracy but make it accessible. 
-If the question is about SAR, remote sensing, satellites, or related topics, provide detailed explanations. 
-If it's off-topic, politely redirect to SAR-related topics.
+You are helping me in NASA Space Apps Challenge (Cairo) on a SAR-related project.  
+I want to explain clearly why and how I will use each of the NASA Data & Resources listed below.  
+
+NASA Data & Resources:
+NASA Earthdata Search
+ASF Vertex (Alaska Satellite Facility)
+Intro to Remote Sensing
+Intro to Synthetic Aperture Radar (SAR)
+NASA ARSET Trainings
+SAR StoryMaps
+NISAR Applications White Papers
+UAVSAR Postcards
+
+Task for you:  
+For each resource, explain its purpose.  
+Show how it can be applied in a practical way in a SAR challenge project.  
+Always mention the source (e.g., "Source: NASA Earthdata Search").  
+If the question or needed data is not in these NASA resources, politely say that you used external sources (e.g., RCM, INPE, SAOCOM).  
 
 Question: ${question}`,
             },
@@ -99,12 +114,12 @@ Question: ${question}`,
   });
 
   const data = await response.json();
-  console.log("Gemini response:", data);
+  console.log("Gemini raw response:", data);
 
   if (data.candidates && data.candidates.length > 0) {
     return data.candidates[0].content.parts[0].text;
   } else {
-    return "⚠️ لم يتم إرجاع أي نتيجة. تحقق من الـ API Key.";
+    return "Error: No response from Gemini.";
   }
 }
 
