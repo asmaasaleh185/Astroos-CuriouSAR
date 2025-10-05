@@ -88,7 +88,11 @@
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 136, 0.3) 0%,
+    transparent 70%
+  );
   animation: logoGlowPulse 3s ease-in-out infinite;
   pointer-events: none;
 }
@@ -110,8 +114,9 @@
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 900;
   color: var(--color-neon-green);
-  text-shadow: 0 0 20px var(--color-neon-green), 0 0 40px var(--color-neon-green), 0 0 60px var(--color-neon-green), 0 0
-    80px rgba(0, 255, 136, 0.5);
+  text-shadow: 0 0 20px var(--color-neon-green),
+    0 0 40px var(--color-neon-green), 0 0 60px var(--color-neon-green),
+    0 0 80px rgba(0, 255, 136, 0.5);
   letter-spacing: 0.2em;
   animation: textGlow 2s ease-in-out infinite;
 }
@@ -119,11 +124,13 @@
 @keyframes textGlow {
   0%,
   100% {
-    text-shadow: 0 0 20px var(--color-neon-green), 0 0 40px var(--color-neon-green), 0 0 60px var(--color-neon-green);
+    text-shadow: 0 0 20px var(--color-neon-green),
+      0 0 40px var(--color-neon-green), 0 0 60px var(--color-neon-green);
   }
   50% {
-    text-shadow: 0 0 30px var(--color-neon-green), 0 0 60px var(--color-neon-green), 0 0 90px var(--color-neon-green), 0
-      0 120px rgba(0, 255, 136, 0.8);
+    text-shadow: 0 0 30px var(--color-neon-green),
+      0 0 60px var(--color-neon-green), 0 0 90px var(--color-neon-green),
+      0 0 120px rgba(0, 255, 136, 0.8);
   }
 }
 
@@ -238,7 +245,12 @@
 .title-underline {
   width: 200px;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-electric-cyan), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-electric-cyan),
+    transparent
+  );
   margin: 0 auto;
   box-shadow: 0 0 20px var(--color-electric-cyan);
   animation: underlineExpand 1.5s ease;
@@ -268,7 +280,11 @@
 /* Story Panels */
 .story-panel {
   position: relative;
-  background: linear-gradient(135deg, rgba(15, 23, 41, 0.8), rgba(26, 11, 46, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 41, 0.8),
+    rgba(26, 11, 46, 0.8)
+  );
   border-radius: 20px;
   padding: 3rem;
   opacity: 0;
@@ -297,7 +313,8 @@
 
 .story-panel:hover .panel-border {
   opacity: 1;
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), inset 0 0 30px rgba(0, 255, 136, 0.1);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6),
+    inset 0 0 30px rgba(0, 255, 136, 0.1);
 }
 
 .panel-content {
@@ -346,114 +363,211 @@
 }
 
 /* Team Members Section */
+
+/* Additional styles for the circular team images and popup */
 .team-section {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3rem;
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2.5rem;
   justify-items: center;
 }
 
 .team-card {
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: 150px;
   aspect-ratio: 1;
-  border-radius: 20px;
+  border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 3px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.3),
+    rgba(0, 217, 255, 0.3)
+  );
+  padding: 5px;
 }
 
 .team-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), 0 0 50px rgba(0, 255, 136, 0.3);
+  border: 3px solid var(--color-neon-green);
 }
 
 .team-photo {
   position: relative;
   width: 100%;
   height: 100%;
-  border: 2px solid var(--color-neon-green);
-  border-radius: 20px;
+  border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-  transition: box-shadow 0.4s ease;
-}
-
-.team-card:hover .team-photo {
-  box-shadow: 0 0 40px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.3);
 }
 
 .team-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
 .team-card:hover .team-photo img {
   transform: scale(1.1);
-  filter: brightness(0.4);
 }
 
-.team-overlay {
-  position: absolute;
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.9), rgba(0, 217, 255, 0.9));
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: 1000;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
-.team-card:hover .team-overlay {
+.popup-overlay.active {
   opacity: 1;
+  visibility: visible;
 }
 
-.team-info {
-  text-align: center;
-  padding: 2rem;
-  transform: translateY(20px);
-  transition: transform 0.4s ease 0.1s;
+.popup-content {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 41, 0.95),
+    rgba(26, 11, 46, 0.95)
+  );
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 90%;
+  border: 2px solid var(--color-neon-green);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.6), 0 0 80px rgba(0, 255, 136, 0.3);
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
 }
 
-.team-card:hover .team-info {
-  transform: translateY(0);
+.popup-overlay.active .popup-content {
+  transform: scale(1);
 }
 
-.member-name {
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--color-neon-green);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.popup-close:hover {
+  transform: rotate(90deg);
+}
+
+.popup-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 2rem;
+  border: 3px solid var(--color-neon-green);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.popup-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--color-space-black);
+  color: var(--color-neon-green);
+  text-align: center;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.popup-role {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-electric-cyan);
+  text-align: center;
+  margin-bottom: 1.5rem;
   letter-spacing: 0.05em;
 }
 
-.member-role {
+.popup-email {
   font-family: var(--font-body);
   font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-space-black);
-  margin-bottom: 0.8rem;
-  opacity: 0.9;
+  color: var(--color-soft-white);
+  text-align: center;
+  margin-bottom: 2rem;
+  word-break: break-all;
 }
 
-.member-email {
+.popup-bio {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--color-space-black);
-  opacity: 0.8;
-  word-break: break-all;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-soft-white);
+  text-align: center;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(0, 255, 136, 0.3);
+  padding-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+  }
+
+  .team-card {
+    max-width: 200px;
+  }
+
+  .popup-content {
+    padding: 2rem;
+  }
+
+  .popup-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .popup-name {
+    font-size: 1.5rem;
+  }
+
+  .popup-role {
+    font-size: 1.1rem;
+  }
+
+  .popup-email {
+    font-size: 1rem;
+  }
 }
 
 /* Return Section */
@@ -502,7 +616,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
