@@ -46,7 +46,7 @@ const stages = [
     type: "optical-images",
     images: [
       {
-        url : "https://media.discordapp.net/attachments/1420541479557795861/1421189227995074570/3840.webp?ex=68e15b9c&is=68e00a1c&hm=63169742a0bb99b5acb81414203245e8080e1dd2cc9208dc86592c82fc6eb3ae&=&format=webp&width=1250&height=704",
+        url : "assets/img/optical1.webp",
         title: "Pre-Disaster Overview",
         description: "Derna rests in fragile stillness, unaware of the flood soon to come.",
         query: "aerial view of coastal city Derna Libya before flooding",
@@ -59,7 +59,7 @@ const stages = [
         query: "satellite image of urban infrastructure and dams in Derna",
       },
       {
-        url : "https://cdn.discordapp.com/attachments/1420541479557795861/1421189307217084546/3840_1.webp?ex=68e15baf&is=68e00a2f&hm=b7b904b43ed5485781e9f222ec852b203651294b93159e09d2ffbaf2829f1728&",
+        url : "assets/img/optical2.webp",
         title: "Coastal Region",
         description: "Where a river once whispered, a flood roared",
 
