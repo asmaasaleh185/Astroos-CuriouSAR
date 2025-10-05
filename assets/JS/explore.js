@@ -116,7 +116,6 @@ const moduleData = {
           <li><strong>Climate Research:</strong> Ice sheet monitoring, sea level rise, temperature patterns</li>
           <li><strong>Military & Security:</strong> Reconnaissance, border monitoring, change detection</li>
         </ul>
-        <img src="https://gisgeography.com/wp-content/uploads/2016/02/Remote-Sensing-Applications.jpg" alt="Applications of remote sensing" width="600"/>
         <p>These applications demonstrate how remote sensing provides critical data for understanding and managing our changing planet.</p>
       `,
     },
@@ -132,13 +131,11 @@ const moduleData = {
         <p>The sensor does not emit energy; it records natural energy from Earth (e.g., sunlight reflected by land/water, or heat emitted by surfaces).</p>
         <p><strong>Examples:</strong> Optical cameras and thermal sensors.</p>
         <p><strong>Limitations:</strong> Optical sensors depend on daylight and clear skies.</p>
-        <img src="https://earthdata.nasa.gov/s3fs-public/2020-03/Passive-Sensing.png" alt="Passive sensing example" width="400"/>
 
         <h4>2.2 Active Remote Sensing</h4>
         <p>The sensor sends out its own signal and measures the returned energy.</p>
         <p><strong>Examples:</strong> Radar and LiDAR.</p>
         <p><strong>Advantages:</strong> Can operate day or night and often through clouds, because it doesn’t rely on sunlight.</p>
-        <img src="https://earthdata.nasa.gov/s3fs-public/2020-03/Active-Sensing.png" alt="Active sensing example" width="400"/>
 
         <h3>3) SAR (Synthetic Aperture Radar) — The Essentials</h3>
         <h4>3.1 What SAR is</h4>
@@ -151,7 +148,6 @@ const moduleData = {
           <li>Sensitive to surface roughness, moisture, and geometry</li>
           <li>Useful for mapping flooding, landslides, sea ice, wetlands, and infrastructure changes</li>
         </ul>
-        <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/145000/145162/SARComparison.jpg" alt="SAR example images" width="600"/>
       `
     }
   ],
